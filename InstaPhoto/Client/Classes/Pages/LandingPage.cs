@@ -4,16 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Client.Interfaces;
 
-namespace Client.Classes
+namespace Client.Classes.Pages
 {
     public class LandingPage : IPage
     {
+        private const char LoginAction = 'L';
+        private const char SignUpAction = 'S';
+        private const char ExitAction = 'X';
+        
         private static readonly Dictionary<char, string> MenuOptions =
             new Dictionary<char, string>
             {
-                {'l', "Login"},
-                {'s', "Sign up"},
-                {'x', "Exit"},
+                {LoginAction, "Login"},
+                {SignUpAction, "Sign up"},
+                {ExitAction, "Exit"},
             };
         
         private readonly IConsoleHelper _console;
@@ -28,15 +32,14 @@ namespace Client.Classes
             _console = console;
             _nextPage = new Dictionary<char, IPage>
             {
-                {'l', null},
-                {'s', null},
-                {'x', null},
+                {LoginAction, new LoginPage(_console)},
+                {SignUpAction, null},
+                {ExitAction, null},
             };
         }
 
         public async Task<IPage> RenderAsync()
         {
-            _console.Clear();
             _console.WriteLine("\n>> Welcome to InstaPhoto! <<\n", ConsoleColor.Cyan);
 
             if (_error)
@@ -45,7 +48,7 @@ namespace Client.Classes
             }
 
             _optionSelected = _console.ShowMenu(MenuOptions);
-            if (_nextPage.ContainsKey(_optionSelected.ToString().ToLower().First()))
+            if (_nextPage.ContainsKey(_optionSelected))
                 return _nextPage[_optionSelected];
 
             // Wrong option, re render the page with error

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Client.Interfaces;
 
 namespace Client.Classes
@@ -38,11 +39,11 @@ namespace Client.Classes
             {
                 Console.WriteLine($"\t<{id}> {text}");
             }
-            return ReadChar();
+            return ReadUppercaseChar();
         }
-        private char ReadChar()
+        private char ReadUppercaseChar()
         {
-            return Console.ReadKey().KeyChar;
+            return Console.ReadKey().KeyChar.ToString().ToUpper().First();
         }
     }
 }
