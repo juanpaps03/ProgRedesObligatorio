@@ -5,34 +5,36 @@ using Client.Interfaces;
 
 namespace Client.Classes
 {
-    public class ConsoleHelper: IConsoleHelper
+    public class ConsoleHelper
     {
-        public void Clear()
+        public const ConsoleColor DefaultConsoleColor = ConsoleColor.Black;
+        
+        public static void Clear()
         {
-            Console.ForegroundColor = IConsoleHelper.DefaultConsoleColor;
+            Console.ForegroundColor = DefaultConsoleColor;
             Console.Clear();
         }
 
-        public void Write(string text, ConsoleColor color = IConsoleHelper.DefaultConsoleColor)
+        public static void Write(string text, ConsoleColor color = DefaultConsoleColor)
         {
             Console.ForegroundColor = color;
             Console.Write(text);
-            Console.ForegroundColor = IConsoleHelper.DefaultConsoleColor;
+            Console.ForegroundColor = DefaultConsoleColor;
         }
 
-        public void WriteLine(string text, ConsoleColor color = IConsoleHelper.DefaultConsoleColor)
+        public static void WriteLine(string text, ConsoleColor color = DefaultConsoleColor)
         {
             Console.ForegroundColor = color;
             Console.WriteLine(text);
-            Console.ForegroundColor = IConsoleHelper.DefaultConsoleColor;
+            Console.ForegroundColor = DefaultConsoleColor;
         }
 
-        public string Read()
+        public static string Read()
         {
             return Console.ReadLine();
         }
 
-        public char ShowMenu(Dictionary<char, string> options)
+        public static char ShowMenu(Dictionary<char, string> options)
         {
             WriteLine("Select an option:", ConsoleColor.Yellow);
             foreach (var (id, text) in options)
@@ -41,7 +43,7 @@ namespace Client.Classes
             }
             return ReadUppercaseChar();
         }
-        private char ReadUppercaseChar()
+        private static char ReadUppercaseChar()
         {
             return Console.ReadKey().KeyChar.ToString().ToUpper().First();
         }

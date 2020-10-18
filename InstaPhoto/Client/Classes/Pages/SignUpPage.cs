@@ -20,38 +20,37 @@ namespace Client.Classes.Pages
                 {ExitAction, "Exit"},
             };
 
-        private readonly IConsoleHelper _console;
-
         private string _username;
         private string _password;
 
         private bool _askRetry;
         private bool _retryOptionError;
         private char _selectedOption;
+        private readonly IPageCreator _pageCreator;
 
-        public SignUpPage(IConsoleHelper console)
+        public SignUpPage(IPageCreator pageCreator)
         {
-            _console = console;
+            _pageCreator = pageCreator;
         }
 
         public async Task<IPage> RenderAsync()
         {
-            _console.WriteLine("Sign up\n", ConsoleColor.Cyan);
+            ConsoleHelper.WriteLine("Sign up\n", ConsoleColor.Cyan);
 
             return !_askRetry ? await RenderLoginAsync() : RenderRetry();
         }
 
         private async Task<IPage> RenderLoginAsync()
         {
-            _console.Write("Username: ");
-            _username = _console.Read();
-            _console.Write("Password: ");
-            _password = _console.Read();
+            ConsoleHelper.Write("Username: ");
+            _username = ConsoleHelper.Read();
+            ConsoleHelper.Write("Password: ");
+            _password = ConsoleHelper.Read();
 
             var validSignUp = await DoSignUp();
 
             if (validSignUp)
-                return new HomePage(_console);
+                return _pageCreator.CreatePage(IPageCreator.PageId.HomePage);
 
             // Wrong login, retry
             _askRetry = true;
@@ -60,7 +59,7 @@ namespace Client.Classes.Pages
 
         private async Task<bool> DoSignUp()
         {
-            _console.WriteLine("\nSigning up...");
+            ConsoleHelper.WriteLine("\nSigning up...");
 
             // TODO: CALL Sign up
             Thread.Sleep(500);
@@ -69,16 +68,16 @@ namespace Client.Classes.Pages
 
         private IPage RenderRetry()
         {
-            _console.WriteLine($"Username: {_username}");
-            _console.WriteLine($"Password: {_password}");
+            ConsoleHelper.WriteLine($"Username: {_username}");
+            ConsoleHelper.WriteLine($"Password: {_password}");
 
-            _console.WriteLine("\nUsername Already in use!\n", ConsoleColor.Red);
+            ConsoleHelper.WriteLine("\nUsername Already in use!\n", ConsoleColor.Red);
             if (_retryOptionError)
             {
-                _console.WriteLine($"\nUnrecognized option <{_selectedOption}>\n", ConsoleColor.Red);
+                ConsoleHelper.WriteLine($"\nUnrecognized option <{_selectedOption}>\n", ConsoleColor.Red);
             }
 
-            _selectedOption = _console.ShowMenu(RetryOptions);
+            _selectedOption = ConsoleHelper.ShowMenu(RetryOptions);
 
             switch (_selectedOption)
             {
@@ -86,7 +85,7 @@ namespace Client.Classes.Pages
                     _askRetry = false;
                     return this;
                 case BackAction:
-                    return new LandingPage(_console);
+                    return _pageCreator.CreatePage(IPageCreator.PageId.LandingPage);
                 case ExitAction:
                     return null;
                 default:

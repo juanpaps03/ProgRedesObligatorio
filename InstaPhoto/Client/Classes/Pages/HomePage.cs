@@ -19,17 +19,14 @@ namespace Client.Classes.Pages
                 {ListUsersAction, "Show users"},
                 {LogOutAction, "Logout"},
             };
-        
-        private readonly IConsoleHelper _console;
 
         private readonly Dictionary<char, IPage> _nextPage;
 
         private bool _error;
         private char _optionSelected = '\0';
 
-        public HomePage(IConsoleHelper console)
+        public HomePage(IPageCreator pageCreator)
         {
-            _console = console;
             _nextPage = new Dictionary<char, IPage>
             {
                 {UploadPhotoAction, null},
@@ -40,14 +37,14 @@ namespace Client.Classes.Pages
 
         public async Task<IPage> RenderAsync()
         {
-            _console.WriteLine("Home: \n", ConsoleColor.Cyan);
+            ConsoleHelper.WriteLine("Home: \n", ConsoleColor.Cyan);
 
             if (_error)
             {
-                _console.WriteLine($"Option <{_optionSelected}> not recognized!\n", ConsoleColor.Red);
+                ConsoleHelper.WriteLine($"Option <{_optionSelected}> not recognized!\n", ConsoleColor.Red);
             }
 
-            _optionSelected = _console.ShowMenu(MenuOptions);
+            _optionSelected = ConsoleHelper.ShowMenu(MenuOptions);
             if (_nextPage.ContainsKey(_optionSelected))
                 return _nextPage[_optionSelected];
 

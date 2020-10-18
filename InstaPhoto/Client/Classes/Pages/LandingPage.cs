@@ -8,10 +8,6 @@ namespace Client.Classes.Pages
 {
     public class LandingPage : IPage
     {
-        private const char LoginAction = 'L';
-        private const char SignUpAction = 'S';
-        private const char ExitAction = 'X';
-        
         private static readonly Dictionary<char, string> MenuOptions =
             new Dictionary<char, string>
             {
@@ -20,34 +16,35 @@ namespace Client.Classes.Pages
                 {ExitAction, "Exit"},
             };
         
-        private readonly IConsoleHelper _console;
+        private const char LoginAction = 'L';
+        private const char SignUpAction = 'S';
+        private const char ExitAction = 'X';
 
         private readonly Dictionary<char, IPage> _nextPage;
 
         private bool _error;
         private char _optionSelected = '\0';
 
-        public LandingPage(IConsoleHelper console)
+        public LandingPage(IPageCreator pageCreator)
         {
-            _console = console;
             _nextPage = new Dictionary<char, IPage>
             {
-                {LoginAction, new LoginPage(_console)},
-                {SignUpAction, new SignUpPage(_console)},
+                {LoginAction, pageCreator.CreatePage(IPageCreator.PageId.LoginPage)},
+                {SignUpAction, pageCreator.CreatePage(IPageCreator.PageId.SignUpPage)},
                 {ExitAction, null},
             };
         }
 
         public async Task<IPage> RenderAsync()
         {
-            _console.WriteLine("\n>> Welcome to InstaPhoto! <<\n", ConsoleColor.Cyan);
+            ConsoleHelper.WriteLine("\n>> Welcome to InstaPhoto! <<\n", ConsoleColor.Cyan);
 
             if (_error)
             {
-                _console.WriteLine($"Option <{_optionSelected}> not recognized!\n", ConsoleColor.Red);
+                ConsoleHelper.WriteLine($"Option <{_optionSelected}> not recognized!\n", ConsoleColor.Red);
             }
 
-            _optionSelected = _console.ShowMenu(MenuOptions);
+            _optionSelected = ConsoleHelper.ShowMenu(MenuOptions);
             if (_nextPage.ContainsKey(_optionSelected))
                 return _nextPage[_optionSelected];
 

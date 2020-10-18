@@ -9,12 +9,12 @@ namespace Client
     {
         static async Task Main(string[] args)
         {
-            var console = new ConsoleHelper();
-            IPage nextPage = new LandingPage(console);
+            IPageCreator pageCreator = new PageCreator();
+            IPage nextPage = pageCreator.CreatePage(IPageCreator.PageId.LandingPage);
 
             while (nextPage != null)
             {
-                console.Clear();
+                ConsoleHelper.Clear();
                 nextPage = await nextPage.RenderAsync();
             }
         }
