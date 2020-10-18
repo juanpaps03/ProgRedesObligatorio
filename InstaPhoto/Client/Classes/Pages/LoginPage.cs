@@ -51,7 +51,7 @@ namespace Client.Classes.Pages
             var validLogin = await DoLogin();
 
             if (validLogin)
-                return null;
+                return new HomePage(_console);
 
             // Wrong login, retry
             _askRetry = true;
