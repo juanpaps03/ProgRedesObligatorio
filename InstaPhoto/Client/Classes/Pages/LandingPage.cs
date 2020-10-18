@@ -33,7 +33,7 @@ namespace Client.Classes.Pages
             _nextPage = new Dictionary<char, IPage>
             {
                 {LoginAction, new LoginPage(_console)},
-                {SignUpAction, null},
+                {SignUpAction, new SignUpPage(_console)},
                 {ExitAction, null},
             };
         }
