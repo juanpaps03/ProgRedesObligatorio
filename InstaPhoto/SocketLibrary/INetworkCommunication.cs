@@ -5,12 +5,12 @@ namespace SocketLibrary
         public void SendBytes(byte[] bytes);
         public byte[] ReceiveBytes(int length);
         public void SendShort(short data);
-        public short ReceiveShort(int lenght);
+        public short ReceiveShort();
         public void SendInt(int data);
-        public int ReceiveInt(int lenght);
+        public int ReceiveInt();
         public void SendLong(long data);
-        public long ReceiveLong(int lenght);
+        public long ReceiveLong();
         public void SendString(string data);
-        public string ReceiveString(int lenght);
+        public string ReceiveString();
     }
 }

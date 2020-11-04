@@ -1,9 +1,10 @@
 namespace SocketLibrary
 {
-    public interface IContentHandler
+    public interface IContentBaseHandler {}
+    public interface IContentHandler<T>: IContentBaseHandler where T : Message
     {
-        public void SendMessage(Message msg);
+        public void SendMessage(T msg);
 
-        public Message ReceiveMessage();
+        public T ReceiveMessage();
     }
 }

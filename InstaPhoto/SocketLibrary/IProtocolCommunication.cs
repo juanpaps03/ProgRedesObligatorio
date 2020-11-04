@@ -4,7 +4,7 @@ namespace SocketLibrary
 {
     public interface IProtocolCommunication
     {
-        public void SendRequest(Request request);
-        public Response HandleRequest(Func<Request,Response> handler);
+        public Response SendRequest(Request request);
+        public void HandleRequest(Func<Request,Response> handler);
     }
 }
