@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Client.Interfaces;
 
@@ -20,14 +19,16 @@ namespace Client.Classes.Pages
                 {LogOutAction, "Logout"},
             };
 
-        private readonly Dictionary<char, IPage> _nextPage;
+        private readonly Dictionary<char, string> _nextPage;
 
         private bool _error;
         private char _optionSelected = '\0';
 
-        public HomePage(IPageCreator pageCreator)
+        private readonly IPageNavigation _navigation;
+        public HomePage(IPageNavigation navigation)
         {
-            _nextPage = new Dictionary<char, IPage>
+            _navigation = navigation;
+            _nextPage = new Dictionary<char, string>
             {
                 {UploadPhotoAction, null},
                 {ListUsersAction, null},
@@ -35,7 +36,7 @@ namespace Client.Classes.Pages
             };
         }
 
-        public async Task<IPage> RenderAsync()
+        public async Task RenderAsync()
         {
             ConsoleHelper.WriteLine("Home: \n", ConsoleColor.Cyan);
 
@@ -46,11 +47,16 @@ namespace Client.Classes.Pages
 
             _optionSelected = ConsoleHelper.ShowMenu(MenuOptions);
             if (_nextPage.ContainsKey(_optionSelected))
-                return _nextPage[_optionSelected];
+            {
+                var pageSelected = _nextPage[_optionSelected];
+                if (pageSelected != null)
+                    _navigation.GoToPage(pageSelected);
+                else
+                    _navigation.Exit();
+            }
 
             // Wrong option, re render the page with error
             _error = true;
-            return this;
         }
     }
 }

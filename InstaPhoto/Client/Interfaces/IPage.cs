@@ -7,6 +7,6 @@ namespace Client.Interfaces
         /**
          * Shows the current page and returns the next page, or null for a graceful exit.
          */
-        Task<IPage> RenderAsync();
+        Task RenderAsync();
     }
 }

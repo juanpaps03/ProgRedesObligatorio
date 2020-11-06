@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Client.Classes;
-using Client.Classes.Pages;
 using Client.Interfaces;
 
 namespace Client
@@ -9,13 +8,13 @@ namespace Client
     {
         static async Task Main(string[] args)
         {
-            IPageCreator pageCreator = new PageCreator();
-            IPage nextPage = pageCreator.CreatePage(IPageCreator.PageId.LandingPage);
+            IPageNavigation navigation = new PageNavigation();
+            navigation.GoToPage(IPageNavigation.LandingPage);
 
-            while (nextPage != null)
+            while (navigation.Top() != null)
             {
                 ConsoleHelper.Clear();
-                nextPage = await nextPage.RenderAsync();
+                await navigation.Top().RenderAsync();
             }
         }
     }

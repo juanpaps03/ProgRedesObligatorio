@@ -26,21 +26,25 @@ namespace Client.Classes.Pages
         private bool _askRetry;
         private bool _retryOptionError;
         private char _selectedOption;
-        private readonly IPageCreator _pageCreator;
 
-        public SignUpPage(IPageCreator pageCreator)
+        private readonly IPageNavigation _navigation;
+
+        public SignUpPage(IPageNavigation navigation)
         {
-            _pageCreator = pageCreator;
+            _navigation = navigation;
         }
 
-        public async Task<IPage> RenderAsync()
+        public async Task RenderAsync()
         {
             ConsoleHelper.WriteLine("Sign up\n", ConsoleColor.Cyan);
 
-            return !_askRetry ? await RenderLoginAsync() : RenderRetry();
+            if (_askRetry)
+                RenderRetry();
+            else
+                await RenderLoginAsync();
         }
 
-        private async Task<IPage> RenderLoginAsync()
+        private async Task RenderLoginAsync()
         {
             ConsoleHelper.Write("Username: ");
             _username = ConsoleHelper.Read();
@@ -50,11 +54,10 @@ namespace Client.Classes.Pages
             var validSignUp = await DoSignUp();
 
             if (validSignUp)
-                return _pageCreator.CreatePage(IPageCreator.PageId.HomePage);
+                _navigation.GoToPage(IPageNavigation.HomePage);
 
             // Wrong login, retry
             _askRetry = true;
-            return this;
         }
 
         private async Task<bool> DoSignUp()
@@ -66,7 +69,7 @@ namespace Client.Classes.Pages
             return _username != "admin";
         }
 
-        private IPage RenderRetry()
+        private void RenderRetry()
         {
             ConsoleHelper.WriteLine($"Username: {_username}");
             ConsoleHelper.WriteLine($"Password: {_password}");
@@ -83,14 +86,16 @@ namespace Client.Classes.Pages
             {
                 case RetryAction:
                     _askRetry = false;
-                    return this;
+                    break;
                 case BackAction:
-                    return _pageCreator.CreatePage(IPageCreator.PageId.LandingPage);
+                    _navigation.GoToPage(IPageNavigation.LandingPage);
+                    break;
                 case ExitAction:
-                    return null;
+                    _navigation.Exit();
+                    break;
                 default:
                     _retryOptionError = true;
-                    return this;
+                    break;
             }
         }
     }
