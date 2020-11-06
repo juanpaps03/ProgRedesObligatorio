@@ -7,31 +7,46 @@ namespace Client.Classes
 {
     public class ConsoleHelper
     {
-        public const ConsoleColor DefaultConsoleColor = ConsoleColor.Black;
-        
+        public const ConsoleColor DefaultColor = ConsoleColor.Black;
+        public const ConsoleColor DefaultBackground = ConsoleColor.White;
+
         public static void Clear()
         {
-            Console.ForegroundColor = DefaultConsoleColor;
+            Console.ForegroundColor = DefaultColor;
+            Console.BackgroundColor = DefaultBackground;
             Console.Clear();
         }
 
-        public static void Write(string text, ConsoleColor color = DefaultConsoleColor)
+        public static void Write(
+            string text = "",
+            ConsoleColor color = DefaultColor,
+            ConsoleColor background = DefaultBackground
+        )
         {
             Console.ForegroundColor = color;
+            Console.BackgroundColor = background;
             Console.Write(text);
-            Console.ForegroundColor = DefaultConsoleColor;
+            Console.ForegroundColor = DefaultColor;
+            Console.BackgroundColor = DefaultBackground;
         }
 
-        public static void WriteLine(string text, ConsoleColor color = DefaultConsoleColor)
+        public static void WriteLine(
+            string text = "",
+            ConsoleColor color = DefaultColor,
+            ConsoleColor background = DefaultBackground
+        )
         {
-            Console.ForegroundColor = color;
-            Console.WriteLine(text);
-            Console.ForegroundColor = DefaultConsoleColor;
+            Write(text + "\n", color, background);
         }
 
-        public static string Read()
+        public static string ReadLine()
         {
             return Console.ReadLine();
+        }
+
+        public static ConsoleKey ReadKey()
+        {
+            return Console.ReadKey().Key;
         }
 
         public static char ShowMenu(Dictionary<char, string> options)
@@ -41,8 +56,10 @@ namespace Client.Classes
             {
                 Console.WriteLine($"\t<{id}> {text}");
             }
+
             return ReadUppercaseChar();
         }
+
         private static char ReadUppercaseChar()
         {
             return Console.ReadKey().KeyChar.ToString().ToUpper().First();
