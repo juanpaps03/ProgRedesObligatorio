@@ -15,30 +15,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="423cde49-b389-401e-8bf8-ef457e4829c7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Client/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase/ContextService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/ContextService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase/DataBase.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/DataBase.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase/Interfaces/IContextService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/Interfaces/IContextService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase/Interfaces/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/Interfaces/IRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase/Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/Repository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto.sln" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/InstaPhoto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/InstaPhoto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/rider.project.restore.info" afterDir="false" />
-    </list>
+    <list default="true" id="423cde49-b389-401e-8bf8-ef457e4829c7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
