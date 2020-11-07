@@ -2,6 +2,8 @@
 using System.Net;
 using System.Net.Sockets;
 using SocketLibrary;
+using SocketLibrary.Messages;
+using SocketLibrary.Messages.Login;
 
 namespace Server
 {

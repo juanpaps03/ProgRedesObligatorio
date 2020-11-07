@@ -1,3 +1,5 @@
+using SocketLibrary.Messages;
+
 namespace SocketLibrary
 {
     public interface IContentBaseHandler {}

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using SocketLibrary.Messages;
+using SocketLibrary.Messages.Login;
 
 namespace SocketLibrary
 {
@@ -26,7 +28,7 @@ namespace SocketLibrary
             switch ((messageId, messageType))
             {
                 case (101, 0):
-                    return new LoginHandler(_networkCommunication).ReceiveMessage();
+                    return new LoginRequestHandler(_networkCommunication).ReceiveMessage();
             }
             // TODO Create a custom exception
             throw new Exception();

@@ -1,4 +1,5 @@
 using System;
+using SocketLibrary.Messages;
 
 namespace SocketLibrary
 {

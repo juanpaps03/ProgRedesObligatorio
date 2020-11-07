@@ -1,5 +1,6 @@
 using System;
 using System.Net.Sockets;
+using SocketLibrary.Messages;
 
 namespace SocketLibrary
 {

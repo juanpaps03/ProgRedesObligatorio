@@ -1,12 +1,10 @@
-using System.Net.Sockets;
-
-namespace SocketLibrary
+namespace SocketLibrary.Messages.Login
 {
-    public class LoginHandler: IContentHandler<LoginRequest>
+    public class LoginRequestHandler: IContentHandler<LoginRequest>
     {
         private NetworkCommunication _networkStream;
 
-        public LoginHandler(NetworkCommunication networkStream)
+        public LoginRequestHandler(NetworkCommunication networkStream)
         {
             _networkStream = networkStream;
         }

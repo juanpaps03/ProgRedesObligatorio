@@ -1,4 +1,4 @@
-namespace SocketLibrary
+namespace SocketLibrary.Messages
 {
     public class Error: Response
     {
