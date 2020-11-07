@@ -10,3 +10,6 @@
 /ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.dll
 /ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.pdb
 /ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.genruntimeconfig.cache
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/bin/Debug/netcoreapp3.1/SocketLibrary.dll
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/bin/Debug/netcoreapp3.1/SocketLibrary.pdb
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.csproj.CopyComplete

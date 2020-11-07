@@ -15,9 +15,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="423cde49-b389-401e-8bf8-ef457e4829c7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="423cde49-b389-401e-8bf8-ef457e4829c7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +23,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Domain/User.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/InstaPhoto/Program.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -52,6 +54,7 @@
         <option value="$PROJECT_DIR$/DataBase/ContextService.cs" />
         <option value="$PROJECT_DIR$/DataBase/Interfaces/IContextService.cs" />
         <option value="$PROJECT_DIR$/InstaPhoto/Program.cs" />
+        <option value="$PROJECT_DIR$/InstaPhoto.sln" />
       </list>
     </option>
   </component>
