@@ -8,8 +8,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6E9789C9-F996-46C6-8366-CD172953ED89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{2888320C-6121-4EB3-A3F1-5C6A5D524C7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{2888320C-6121-4EB3-A3F1-5C6A5D524C7E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketLibrary", "SocketLibrary\SocketLibrary.csproj", "{170E4525-E579-4820-96C6-D8FA3DC4793A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{A9115253-B5F0-440F-86F6-34E1B60485A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,5 +44,9 @@ Global
 		{170E4525-E579-4820-96C6-D8FA3DC4793A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170E4525-E579-4820-96C6-D8FA3DC4793A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170E4525-E579-4820-96C6-D8FA3DC4793A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9115253-B5F0-440F-86F6-34E1B60485A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9115253-B5F0-440F-86F6-34E1B60485A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9115253-B5F0-440F-86F6-34E1B60485A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9115253-B5F0-440F-86F6-34E1B60485A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

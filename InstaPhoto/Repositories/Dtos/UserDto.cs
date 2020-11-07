@@ -1,15 +1,13 @@
-﻿using System;
+using Dapper.Contrib.Extensions;
 
-namespace Domain
+namespace Repositories.Dtos
 {
-    public class User
+    [Table("Users")]
+    public class UserDto
     {
+        [ExplicitKey]
         public string Username { get; set; }
         public string Password { get; set; }
         public bool Admin { get; set;  }
-
-        public User()
-        {
-        }
     }
 }

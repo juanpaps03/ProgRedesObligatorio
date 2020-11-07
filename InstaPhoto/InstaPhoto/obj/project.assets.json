@@ -376,20 +376,6 @@
           }
         }
       },
-      "DataBase/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "Dapper.Contrib": "2.0.35",
-          "Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/DataBase.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DataBase.dll": {}
-        }
-      },
       "Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -398,6 +384,34 @@
         },
         "runtime": {
           "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "Repositories/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.35",
+          "Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Repositories.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repositories.dll": {}
+        }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Repositories": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
         }
       }
     }
@@ -1353,37 +1367,47 @@
         "version.txt"
       ]
     },
-    "DataBase/1.0.0": {
-      "type": "project",
-      "path": "../DataBase/DataBase.csproj",
-      "msbuildProject": "../DataBase/DataBase.csproj"
-    },
     "Domain/1.0.0": {
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Repositories/1.0.0": {
+      "type": "project",
+      "path": "../Repositories/Repositories.csproj",
+      "msbuildProject": "../Repositories/Repositories.csproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "DataBase >= 1.0.0",
+      "Repositories >= 1.0.0",
+      "Services >= 1.0.0",
       "System.Data.SQLite >= 1.0.113.6"
     ]
   },
   "packageFolders": {
-    "/Users/carolinabula/.nuget/packages/": {}
+    "/home/diego/.nuget/packages/": {},
+    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
+      "projectUniqueName": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
       "projectName": "InstaPhoto",
-      "projectPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
-      "packagesPath": "/Users/carolinabula/.nuget/packages/",
-      "outputPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/obj/",
+      "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
+      "packagesPath": "/home/diego/.nuget/packages/",
+      "outputPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/Users/carolinabula/.nuget/NuGet/NuGet.Config"
+        "/home/diego/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -1394,8 +1418,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj": {
-              "projectPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj"
+            "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj": {
+              "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj"
+            },
+            "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/Services.csproj": {
+              "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/Services.csproj"
             }
           }
         }
@@ -1429,7 +1456,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -11,11 +11,101 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="423cde49-b389-401e-8bf8-ef457e4829c7" name="Default Changelist" comment="" />
+    <list default="true" id="5df16282-29b2-47ee-8f18-cf9730fa0eb1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Repositories/Dtos/UserDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/Interfaces/IUserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/Interfaces/IUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/Repositories.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/UserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InstaPhoto/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Client/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/ContextService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/DataBase.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/Dtos/UserDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/Interfaces/IContextService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/Interfaces/IRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/Repository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/bin/Debug/netcoreapp3.1/DataBase.deps.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/bin/Debug/netcoreapp3.1/DataBase.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/bin/Debug/netcoreapp3.1/DataBase.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/bin/Debug/netcoreapp3.1/Domain.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/bin/Debug/netcoreapp3.1/Domain.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Context.csproj.nuget.dgspec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Context.csproj.nuget.g.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Context.csproj.nuget.g.targets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/DataBase.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/obj/DataBase.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/DataBase.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/obj/DataBase.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/Context.AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/Context.AssemblyInfoInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/Context.assets.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/Context.csprojAssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.AssemblyInfoInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.assets.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.csproj.CopyComplete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.csproj.CoreCompileInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.csproj.FileListAbsolute.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.csprojAssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/Debug/netcoreapp3.1/DataBase.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/project.packagespec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/obj/rider.project.restore.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/bin/Debug/netcoreapp3.1/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/bin/Debug/netcoreapp3.1/Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/bin/Debug/netcoreapp3.1/Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/bin/Debug/netcoreapp3.1/Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/Debug/netcoreapp3.1/Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto.sln" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/InstaPhoto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/InstaPhoto.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/DataBase.dll" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/DataBase.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/DataBase.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/DataBase.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/InstaPhoto.dll" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/InstaPhoto.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/InstaPhoto.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/InstaPhoto.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/InstaPhoto.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/InstaPhoto.runtimeconfig.dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/runtimes/win-arm64/native/sni.dll" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/runtimes/win-arm64/native/sni.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/sni.dll" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/sni.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/sni.dll" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/sni.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.dll" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/Debug/netcoreapp3.1/InstaPhoto.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/InstaPhoto.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InstaPhoto/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/InstaPhoto/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dbInstaPhoto.db" beforeDir="false" afterPath="$PROJECT_DIR$/../dbInstaPhoto.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dbInstaPhoto.db-journal" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,8 +115,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Domain/User.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/InstaPhoto/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Repositories/Dtos/UserDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/InstaPhoto/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Domain/User.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -37,7 +128,6 @@
         <option value="$PROJECT_DIR$/Server/ServerInstaPhoto.cs" />
         <option value="$PROJECT_DIR$/Domain/Class1.cs" />
         <option value="$PROJECT_DIR$/Domain/Client.cs" />
-        <option value="$PROJECT_DIR$/Domain/User.cs" />
         <option value="$PROJECT_DIR$/Domain/Photo.cs" />
         <option value="$PROJECT_DIR$/Domain/Comment.cs" />
         <option value="$PROJECT_DIR$/Context/Class1.cs" />
@@ -48,13 +138,19 @@
         <option value="$PROJECT_DIR$/DataBase/InstaStore.cs" />
         <option value="$PROJECT_DIR$/DataBase/Context.cs" />
         <option value="$PROJECT_DIR$/DataBase/IRepository.cs" />
-        <option value="$PROJECT_DIR$/DataBase/Dtos/UserDto.cs" />
         <option value="$PROJECT_DIR$/DataBase/Repository.cs" />
         <option value="$PROJECT_DIR$/DataBase/Interfaces/IRepository.cs" />
         <option value="$PROJECT_DIR$/DataBase/ContextService.cs" />
         <option value="$PROJECT_DIR$/DataBase/Interfaces/IContextService.cs" />
-        <option value="$PROJECT_DIR$/InstaPhoto/Program.cs" />
         <option value="$PROJECT_DIR$/InstaPhoto.sln" />
+        <option value="$PROJECT_DIR$/DataBase/Interfaces/IUserService.cs" />
+        <option value="$PROJECT_DIR$/DataBase/UserRepository.cs" />
+        <option value="$PROJECT_DIR$/DataBase/Interfaces/IUserRepository.cs" />
+        <option value="$PROJECT_DIR$/DataBase/Dtos/UserDto.cs" />
+        <option value="$PROJECT_DIR$/Domain/User.cs" />
+        <option value="$PROJECT_DIR$/DataBase/UserService.cs" />
+        <option value="$PROJECT_DIR$/InstaPhoto/Program.cs" />
+        <option value="$PROJECT_DIR$/Services/Class1.cs" />
       </list>
     </option>
   </component>
@@ -164,14 +260,31 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1603331891857" />
+    <state width="1824" height="275" key="GridCell.Tab.0.bottom" timestamp="1604768512764">
+      <screen x="50" y="27" width="1870" height="1053" />
+    </state>
+    <state width="1824" height="275" key="GridCell.Tab.0.bottom/50.27.1870.1053@50.27.1870.1053" timestamp="1604768512764" />
+    <state width="1824" height="275" key="GridCell.Tab.0.center" timestamp="1604768512763">
+      <screen x="50" y="27" width="1870" height="1053" />
+    </state>
+    <state width="1824" height="275" key="GridCell.Tab.0.center/50.27.1870.1053@50.27.1870.1053" timestamp="1604768512763" />
+    <state width="1824" height="275" key="GridCell.Tab.0.left" timestamp="1604768512763">
+      <screen x="50" y="27" width="1870" height="1053" />
+    </state>
+    <state width="1824" height="275" key="GridCell.Tab.0.left/50.27.1870.1053@50.27.1870.1053" timestamp="1604768512763" />
+    <state width="1824" height="275" key="GridCell.Tab.0.right" timestamp="1604768512764">
+      <screen x="50" y="27" width="1870" height="1053" />
+    </state>
+    <state width="1824" height="275" key="GridCell.Tab.0.right/50.27.1870.1053@50.27.1870.1053" timestamp="1604768512764" />
     <state width="256" height="455" key="HiddenNamespacesPopup" timestamp="1603293455654">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="256" height="455" key="HiddenNamespacesPopup/0.0.1440.900@0.0.1440.900" timestamp="1603293455654" />
-    <state x="320" y="189" key="Rider.ProjectTemplateDialog.Size" timestamp="1604451705387">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="466" y="248" width="800" height="537" key="Rider.ProjectTemplateDialog.Size" timestamp="1604768722610">
+      <screen x="50" y="27" width="1870" height="1053" />
     </state>
     <state x="320" y="189" key="Rider.ProjectTemplateDialog.Size/0.0.1440.900@0.0.1440.900" timestamp="1604451705387" />
+    <state x="466" y="248" width="800" height="537" key="Rider.ProjectTemplateDialog.Size/50.27.1870.1053@50.27.1870.1053" timestamp="1604768722610" />
     <state x="100" y="123" width="1240" height="607" key="VCS.FileHistoryDialog" timestamp="1604710585669">
       <screen x="0" y="23" width="1440" height="807" />
     </state>

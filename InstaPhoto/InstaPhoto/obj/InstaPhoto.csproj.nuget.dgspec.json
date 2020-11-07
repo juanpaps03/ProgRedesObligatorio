@@ -1,80 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/InstaPhoto.csproj": {}
+    "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/InstaPhoto.csproj": {}
   },
   "projects": {
-    "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj": {
+    "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj",
-        "projectName": "DataBase",
-        "projectPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj",
-        "packagesPath": "/Users/carolinabula/.nuget/packages/",
-        "outputPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/carolinabula/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "projectReferences": {
-              "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Domain/Domain.csproj": {
-                "projectPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Domain/Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
-          "dependencies": {
-            "Dapper.Contrib": {
-              "target": "Package",
-              "version": "[2.0.35, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Domain/Domain.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Domain/Domain.csproj",
+        "projectUniqueName": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Domain/Domain.csproj",
-        "packagesPath": "/Users/carolinabula/.nuget/packages/",
-        "outputPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Domain/obj/",
+        "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/Domain.csproj",
+        "packagesPath": "/home/diego/.nuget/packages/",
+        "outputPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/carolinabula/.nuget/NuGet/NuGet.Config"
+          "/home/diego/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -110,21 +53,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/InstaPhoto.csproj": {
+    "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/InstaPhoto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
+        "projectUniqueName": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
         "projectName": "InstaPhoto",
-        "projectPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
-        "packagesPath": "/Users/carolinabula/.nuget/packages/",
-        "outputPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/InstaPhoto/obj/",
+        "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/InstaPhoto.csproj",
+        "packagesPath": "/home/diego/.nuget/packages/",
+        "outputPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/InstaPhoto/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/carolinabula/.nuget/NuGet/NuGet.Config"
+          "/home/diego/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -135,8 +81,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj": {
-                "projectPath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj"
+              "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj": {
+                "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj"
+              },
+              "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/Services.csproj": {
+                "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/Services.csproj"
               }
             }
           }
@@ -170,7 +119,130 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj",
+        "projectName": "Repositories",
+        "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj",
+        "packagesPath": "/home/diego/.nuget/packages/",
+        "outputPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/diego/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/Domain.csproj": {
+                "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Dapper.Contrib": {
+              "target": "Package",
+              "version": "[2.0.35, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/Services.csproj",
+        "projectName": "Services",
+        "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/Services.csproj",
+        "packagesPath": "/home/diego/.nuget/packages/",
+        "outputPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Services/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/diego/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/Domain.csproj": {
+                "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Domain/Domain.csproj"
+              },
+              "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj": {
+                "projectPath": "/home/diego/ORT/ProgRedes/ProgRedesObligatorio/InstaPhoto/Repositories/Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
         }
       }
     }

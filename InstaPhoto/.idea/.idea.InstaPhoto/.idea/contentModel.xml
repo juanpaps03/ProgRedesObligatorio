@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_InstaPhoto.1105598680.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Client" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Classes" t="Include">
           <e p="ConsoleHelper.cs" t="Include" />
           <e p="Menu.cs" t="Include" />
@@ -21,6 +22,7 @@
           <e p="IPage.cs" t="Include" />
           <e p="IPageNavigation.cs" t="Include" />
         </e>
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -29,30 +31,12 @@
           </e>
         </e>
       </e>
-      <e p="DataBase" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="ContextService.cs" t="Include" />
-        <e p="DataBase.csproj" t="IncludeRecursive" />
-        <e p="Dtos" t="Include">
-          <e p="UserDto.cs" t="Include" />
-        </e>
-        <e p="Interfaces" t="Include">
-          <e p="IContextService.cs" t="Include" />
-          <e p="IRepository.cs" t="Include" />
-        </e>
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="DataBase.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-        <e p="Repository.cs" t="Include" />
-      </e>
       <e p="Domain" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Comment.cs" t="Include" />
         <e p="Domain.csproj" t="IncludeRecursive" />
+        <e p="Photo.cs" t="Include" />
+        <e p="User.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -60,12 +44,11 @@
             </e>
           </e>
         </e>
-        <e p="Photo.cs" t="Include" />
-        <e p="User.cs" t="Include" />
       </e>
       <e p="InstaPhoto" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
         <e p="InstaPhoto.csproj" t="IncludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -73,11 +56,29 @@
             </e>
           </e>
         </e>
-        <e p="Program.cs" t="Include" />
       </e>
       <e p="InstaPhoto.sln" t="IncludeFlat" />
-      <e p="packages" t="ExcludeRecursive" />
+      <e p="Repositories" t="IncludeRecursive">
+        <e p="Dtos" t="Include">
+          <e p="UserDto.cs" t="Include" />
+        </e>
+        <e p="Interfaces" t="Include">
+          <e p="IUserRepository.cs" t="Include" />
+        </e>
+        <e p="Repositories.csproj" t="IncludeRecursive" />
+        <e p="UserRepository.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Repositories.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Server" t="IncludeRecursive">
+        <e p="Server.csproj" t="IncludeRecursive" />
+        <e p="ServerInstaPhoto.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -86,11 +87,23 @@
             </e>
           </e>
         </e>
-        <e p="Server.csproj" t="IncludeRecursive" />
-        <e p="ServerInstaPhoto.cs" t="Include" />
+      </e>
+      <e p="Services" t="IncludeRecursive">
+        <e p="Interfaces" t="Include">
+          <e p="IUserService.cs" t="Include" />
+        </e>
+        <e p="Services.csproj" t="IncludeRecursive" />
+        <e p="UserService.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Services.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
       </e>
       <e p="SocketLibrary" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Error.cs" t="Include" />
         <e p="IContentHandler.cs" t="Include" />
         <e p="IMessageCommunication.cs" t="Include" />
@@ -102,6 +115,11 @@
         <e p="Message.cs" t="Include" />
         <e p="MessageCommunication.cs" t="Include" />
         <e p="NetworkCommunication.cs" t="Include" />
+        <e p="ProtocolCommunication.cs" t="Include" />
+        <e p="Request.cs" t="Include" />
+        <e p="Response.cs" t="Include" />
+        <e p="SocketLibrary.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -109,15 +127,8 @@
             </e>
           </e>
         </e>
-        <e p="ProtocolCommunication.cs" t="Include" />
-        <e p="Request.cs" t="Include" />
-        <e p="Response.cs" t="Include" />
-        <e p="SocketLibrary.csproj" t="IncludeRecursive" />
       </e>
+      <e p="packages" t="ExcludeRecursive" />
     </e>
-    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
-    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_InstaPhoto.-77491946.00" t="ExcludeRecursive" />
   </component>
 </project>
