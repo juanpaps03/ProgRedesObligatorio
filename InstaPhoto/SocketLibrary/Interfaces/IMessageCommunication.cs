@@ -1,11 +1,12 @@
+using System.Threading.Tasks;
 using SocketLibrary.Messages;
 
-namespace SocketLibrary
+namespace SocketLibrary.Interfaces
 {
     public interface IMessageCommunication
     {
-        public void SendMessage(Message msg);
+        public Task SendMessageAsync(Message msg);
 
-        public Message ReceiveMessage();
+        public Task<Message> ReceiveMessageAsync();
     }
 }

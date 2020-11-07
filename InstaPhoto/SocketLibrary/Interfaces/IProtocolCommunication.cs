@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using SocketLibrary.Messages;
 
-namespace SocketLibrary
+namespace SocketLibrary.Interfaces
 {
     public interface IProtocolCommunication
     {
-        public Response SendRequest(Request request);
-        public void HandleRequest(Func<Request,Response> handler);
+        public Task<Response> SendRequestAsync(Request request);
+        public Task HandleRequestAsync(Func<Request,Response> handler);
     }
 }
