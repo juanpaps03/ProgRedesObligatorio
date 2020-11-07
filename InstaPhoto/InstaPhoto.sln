@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketLibrary", "SocketLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{A9115253-B5F0-440F-86F6-34E1B60485A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{93E4DAAD-E22E-485F-87C8-8B56A9F90D07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{A9115253-B5F0-440F-86F6-34E1B60485A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9115253-B5F0-440F-86F6-34E1B60485A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9115253-B5F0-440F-86F6-34E1B60485A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E4DAAD-E22E-485F-87C8-8B56A9F90D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E4DAAD-E22E-485F-87C8-8B56A9F90D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E4DAAD-E22E-485F-87C8-8B56A9F90D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E4DAAD-E22E-485F-87C8-8B56A9F90D07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
