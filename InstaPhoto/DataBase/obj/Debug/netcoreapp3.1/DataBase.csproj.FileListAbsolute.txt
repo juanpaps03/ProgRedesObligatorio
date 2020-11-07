@@ -1,0 +1,12 @@
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/bin/Debug/netcoreapp3.1/DataBase.deps.json
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/bin/Debug/netcoreapp3.1/DataBase.dll
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/bin/Debug/netcoreapp3.1/DataBase.pdb
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/bin/Debug/netcoreapp3.1/Domain.dll
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/bin/Debug/netcoreapp3.1/Domain.pdb
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/Debug/netcoreapp3.1/DataBase.csprojAssemblyReference.cache
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/Debug/netcoreapp3.1/DataBase.AssemblyInfoInputs.cache
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/Debug/netcoreapp3.1/DataBase.AssemblyInfo.cs
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/Debug/netcoreapp3.1/DataBase.csproj.CoreCompileInputs.cache
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/Debug/netcoreapp3.1/DataBase.csproj.CopyComplete
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/Debug/netcoreapp3.1/DataBase.dll
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/obj/Debug/netcoreapp3.1/DataBase.pdb

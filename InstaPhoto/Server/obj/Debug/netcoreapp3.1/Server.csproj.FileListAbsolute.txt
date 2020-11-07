@@ -1,0 +1,12 @@
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/bin/Debug/netcoreapp3.1/Server.deps.json
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/bin/Debug/netcoreapp3.1/Server.runtimeconfig.json
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/bin/Debug/netcoreapp3.1/Server.runtimeconfig.dev.json
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/bin/Debug/netcoreapp3.1/Server.dll
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/bin/Debug/netcoreapp3.1/Server.pdb
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.csprojAssemblyReference.cache
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.AssemblyInfoInputs.cache
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.AssemblyInfo.cs
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.csproj.CoreCompileInputs.cache
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.dll
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.pdb
+/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/Server/obj/Debug/netcoreapp3.1/Server.genruntimeconfig.cache

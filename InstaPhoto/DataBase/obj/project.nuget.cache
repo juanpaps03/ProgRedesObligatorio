@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "seHKPp/dHpMo2CiB7+6/tu8ezK20Q6f8X5YUq/Yt1An1n/ENQoVL3S/IHt1HyWoKGlEcz3axcFtIjlXY7YRl4A==",
+  "success": true,
+  "projectFilePath": "/ORT/Obligatorio Poittevin-Insua-Bula/InstaPhoto/DataBase/DataBase.csproj",
+  "expectedPackageFiles": [
+    "/Users/carolinabula/.nuget/packages/dapper/2.0.35/dapper.2.0.35.nupkg.sha512",
+    "/Users/carolinabula/.nuget/packages/dapper.contrib/2.0.35/dapper.contrib.2.0.35.nupkg.sha512",
+    "/Users/carolinabula/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/Users/carolinabula/.nuget/packages/system.reflection.emit/4.7.0/system.reflection.emit.4.7.0.nupkg.sha512",
+    "/Users/carolinabula/.nuget/packages/system.reflection.emit.lightweight/4.7.0/system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
