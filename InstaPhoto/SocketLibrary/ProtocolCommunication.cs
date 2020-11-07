@@ -1,32 +1,33 @@
 using System;
 using System.Net.Sockets;
+using System.Threading.Tasks;
+using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
 
 namespace SocketLibrary
 {
     public class ProtocolCommunication: IProtocolCommunication
     {
-        public readonly IMessageCommunication MsgCommunication;
+        private readonly IMessageCommunication _msgCommunication;
 
         public ProtocolCommunication(NetworkStream stream)
         {
             
-            MsgCommunication = new MessageCommunication(stream);
+            _msgCommunication = new MessageCommunication(stream);
         }
 
-        public Response SendRequest(Request request)
+        public async Task<Response> SendRequestAsync(Request request)
         {
-            MsgCommunication.SendMessage(request);
+            await _msgCommunication.SendMessageAsync(request);
             // TODO: Add try catch
-            return (Response) MsgCommunication.ReceiveMessage();
+            return (Response) await _msgCommunication.ReceiveMessageAsync();
         }
 
-        public void HandleRequest(Func<Request, Response> handler)
+        public async Task HandleRequestAsync(Func<Request, Response> handler)
         {
-            Message msg = MsgCommunication.ReceiveMessage();
             // TODO: add try catch to cast
-            Request request = (Request) msg;
-            MsgCommunication.SendMessage(handler(request));
+            Request request = (Request) await _msgCommunication.ReceiveMessageAsync();
+            await _msgCommunication.SendMessageAsync(handler(request));
         }
     }
 }

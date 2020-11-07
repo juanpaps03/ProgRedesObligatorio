@@ -1,100 +1,92 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocketLibrary
 {
-    public class NetworkCommunication: INetworkCommunication
+    public class NetworkCommunication : INetworkCommunication
     {
-        private NetworkStream _networkStream;
+        private readonly NetworkStream _networkStream;
 
         public NetworkCommunication(NetworkStream networkStream)
         {
             _networkStream = networkStream;
         }
-        
-        private void Send(byte[] data)
+
+        public async Task SendBytesAsync(byte[] data)
         {
-            _networkStream.Write(
+            await _networkStream.WriteAsync(
                 data,
                 0,
-                data.Length);
-            
+                data.Length
+            );
         }
 
-        public byte[] Receive(int length)
+        public async Task<byte[]> ReceiveBytesAsync(int length)
         {
             int offset = 0;
             var data = new byte[length];
             while (offset < length)
             {
-                var received = _networkStream.Read(
+                var received = await _networkStream.ReadAsync(
                     data,
                     offset,
-                    length - offset);
+                    length - offset
+                );
                 if (received == 0)
                     throw new Exception("Connection lost");
                 offset += received;
             }
+
             return data;
         }
 
-        public void SendBytes(byte[] data)
+        public async Task SendShortAsync(short data)
         {
-            Send(data);
+            await SendLongAsync(data);
         }
 
-        public byte[] ReceiveBytes(int lenght)
+        public async Task<short> ReceiveShortAsync()
         {
-            return Receive(lenght);
-        }
-
-        public void SendShort(short data)
-        {
-            SendLong(data);
-        }
-
-        public short ReceiveShort()
-        {
-            byte[] data = ReceiveBytes(2);
+            byte[] data = await ReceiveBytesAsync(2);
             return BitConverter.ToInt16(data, 0);
         }
 
-        public void SendInt(int data)
+        public async Task SendIntAsync(int data)
         {
-            SendLong(data);
+            await SendLongAsync(data);
         }
 
-        public int ReceiveInt()
+        public async Task<int> ReceiveIntAsync()
         {
-            
-            byte[] data = ReceiveBytes(4);
+            byte[] data = await ReceiveBytesAsync(4);
             return BitConverter.ToInt32(data, 0);
         }
 
-        public void SendLong(long data)
+        public async Task SendLongAsync(long data)
         {
             byte[] dataBytes = BitConverter.GetBytes(data);
-            SendBytes(dataBytes);
+            await SendBytesAsync(dataBytes);
         }
 
-        public long ReceiveLong()
+        public async Task<long> ReceiveLongAsync()
         {
-            byte[] data = ReceiveBytes(8);
+            byte[] data = await ReceiveBytesAsync(8);
             return BitConverter.ToInt64(data, 0);
         }
 
-        public void SendString(string data)
+        public async Task SendStringAsync(string data)
         {
             byte[] dataBytes = Encoding.UTF8.GetBytes(data);
-            SendInt(dataBytes.Length);
-            SendBytes(dataBytes);
+            await SendIntAsync(dataBytes.Length);
+            await SendBytesAsync(dataBytes);
         }
 
-        public string ReceiveString()
+        public async Task<string> ReceiveStringAsync()
         {
-            int lenght = ReceiveInt();
-            byte[] dataBytes = ReceiveBytes(lenght);
+            int lenght = await ReceiveIntAsync();
+            byte[] dataBytes = await ReceiveBytesAsync(lenght);
             return Encoding.UTF8.GetString(dataBytes);
         }
     }

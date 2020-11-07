@@ -1,12 +1,12 @@
+using System.Threading.Tasks;
 using SocketLibrary.Messages;
 
-namespace SocketLibrary
+namespace SocketLibrary.Interfaces
 {
-    public interface IContentBaseHandler {}
-    public interface IContentHandler<T>: IContentBaseHandler where T : Message
+    public interface IContentHandler<T> where T : Message
     {
-        public void SendMessage(T msg);
+        public Task SendMessageAsync(T msg);
 
-        public T ReceiveMessage();
+        public Task<T> ReceiveMessageAsync();
     }
 }

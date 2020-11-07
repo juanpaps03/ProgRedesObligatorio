@@ -1,3 +1,6 @@
+using System.Threading.Tasks;
+using SocketLibrary.Interfaces;
+
 namespace SocketLibrary.Messages.Login
 {
     public class LoginRequestHandler: IContentHandler<LoginRequest>
@@ -9,12 +12,12 @@ namespace SocketLibrary.Messages.Login
             _networkStream = networkStream;
         }
 
-        public void SendMessage(LoginRequest msg)
+        public Task SendMessageAsync(LoginRequest msg)
         {
             throw new System.NotImplementedException();
         }
 
-        public LoginRequest ReceiveMessage()
+        public Task<LoginRequest> ReceiveMessageAsync()
         {
             throw new System.NotImplementedException();
         }
