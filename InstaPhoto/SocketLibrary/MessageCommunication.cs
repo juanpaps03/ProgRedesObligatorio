@@ -1,38 +1,90 @@
 using System;
-using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
+using SocketLibrary.Messages.CreatePhoto;
+using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 
 namespace SocketLibrary
 {
-    public class MessageCommunication: IMessageCommunication
+    public class MessageCommunication : IMessageCommunication
     {
-        private readonly NetworkCommunication _networkCommunication;
+        private readonly INetworkCommunication _networkCommunication;
+        private readonly IFileCommunication _fileCommunication;
 
         public MessageCommunication(NetworkStream networkStream)
         {
             _networkCommunication = new NetworkCommunication(networkStream);
+            _fileCommunication = new FileCommunication(networkStream);
         }
 
         public async Task SendMessageAsync(Message msg)
         {
-            throw new System.NotImplementedException();
+            await _networkCommunication.SendBytesAsync(new[] {(byte) msg.Type});
+            await _networkCommunication.SendShortAsync((short) msg.Id);
+            switch (msg)
+            {
+                // Error
+                case ErrorResponse errorResponse:
+                    var errorResponseHandler = new ErrorResponseHandler(_networkCommunication);
+                    await errorResponseHandler.SendMessageAsync(errorResponse);
+                    break;
+                
+                // Login
+                case LoginRequest loginRequest:
+                    var loginRequestHandler = new LoginRequestHandler(_networkCommunication);
+                    await loginRequestHandler.SendMessageAsync(loginRequest);
+                    break;
+                
+                // Create photo
+                case CreatePhotoRequest createPhotoRequest:
+                    var createPhotoRequestHandler = new CreatePhotoRequestHandler(
+                        _networkCommunication,
+                        _fileCommunication
+                    );
+                    await createPhotoRequestHandler.SendMessageAsync(createPhotoRequest);
+                    break;
+                case CreatePhotoResponse createPhotoResponse:
+                    var createPhotoResponseHandler = new CreatePhotoResponseHandler();
+                    await createPhotoResponseHandler.SendMessageAsync(createPhotoResponse);
+                    break;
+                default:
+                    // TODO Create a custom exception
+                    throw new Exception();
+            }
         }
 
         public async Task<Message> ReceiveMessageAsync()
         {
-            byte[] msg = await _networkCommunication.ReceiveBytesAsync(1);
-            byte messageType = msg[0];
-            short messageId = await _networkCommunication.ReceiveShortAsync();
-            switch ((messageId, messageType))
+            var messageType = (MessageType) (await _networkCommunication.ReceiveBytesAsync(1))[0];
+            var messageId = (MessageId) await _networkCommunication.ReceiveShortAsync();
+            switch (messageId, messageType)
             {
-                case (101, 0):
+                // Error
+                case (MessageId.Error, MessageType.Response):
+                    var errorResponseHandler = new ErrorResponseHandler(_networkCommunication);
+                    return await errorResponseHandler.ReceiveMessageAsync();
+                
+                // Login
+                case (MessageId.Login, MessageType.Request):
                     var loginRequestHandler = new LoginRequestHandler(_networkCommunication);
                     return await loginRequestHandler.ReceiveMessageAsync();
+                
+                // Create photo
+                case (MessageId.CreatePhoto, MessageType.Request):
+                    var createPhotoRequestHandler = new CreatePhotoRequestHandler(
+                        _networkCommunication,
+                        _fileCommunication
+                    );
+                    return await createPhotoRequestHandler.ReceiveMessageAsync();
+                case (MessageId.CreatePhoto, MessageType.Response):
+                    var createPhotoResponseHandler = new CreatePhotoResponseHandler();
+                    return await createPhotoResponseHandler.ReceiveMessageAsync();
             }
+
             // TODO Create a custom exception
             throw new Exception();
         }
