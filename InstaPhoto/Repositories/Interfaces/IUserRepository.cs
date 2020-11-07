@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataBase.Dtos;
+using Repositories.Dtos;
 
-namespace DataBase.Interfaces
+namespace Repositories.Interfaces
 {
-    public interface IRepository
+    public interface IUserRepository
     {
         Task<IEnumerable<UserDto>> GetUsersAsync();
         Task<UserDto> GetUsersByUserNameAsync(string userName);

@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "InstaPhoto/1.0.0": {
         "dependencies": {
-          "DataBase": "1.0.0",
+          "Repositories": "1.0.0",
+          "Services": "1.0.0",
           "System.Data.SQLite": "1.0.113.6"
         },
         "runtime": {
@@ -301,18 +302,27 @@
           }
         }
       },
-      "DataBase/1.0.0": {
+      "Domain/1.0.0": {
+        "runtime": {
+          "Domain.dll": {}
+        }
+      },
+      "Repositories/1.0.0": {
         "dependencies": {
           "Dapper.Contrib": "2.0.35",
           "Domain": "1.0.0"
         },
         "runtime": {
-          "DataBase.dll": {}
+          "Repositories.dll": {}
         }
       },
-      "Domain/1.0.0": {
+      "Services/1.0.0": {
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Repositories": "1.0.0"
+        },
         "runtime": {
-          "Domain.dll": {}
+          "Services.dll": {}
         }
       }
     }
@@ -512,12 +522,17 @@
       "path": "system.windows.extensions/4.6.0",
       "hashPath": "system.windows.extensions.4.6.0.nupkg.sha512"
     },
-    "DataBase/1.0.0": {
+    "Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Domain/1.0.0": {
+    "Repositories/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

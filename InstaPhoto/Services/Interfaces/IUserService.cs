@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Domain;
 
-namespace DataBase.Interfaces
+namespace Services.Interfaces
 {
-    public interface IContextService
+    public interface IUserService
     {
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserByUserNameAsync(string userName);

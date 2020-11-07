@@ -2,16 +2,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
-using DataBase.Dtos;
-using DataBase.Interfaces;
+using Repositories.Dtos;
+using Repositories.Interfaces;
 
-namespace DataBase
+namespace Repositories
 {
-    public class Repository : IRepository
+    public class UserRepository : IUserRepository
     {
         private readonly IDbConnection _dbConnection;
     
-        public Repository(IDbConnection dbConnection)
+        public UserRepository(IDbConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }

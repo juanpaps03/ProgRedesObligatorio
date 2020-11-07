@@ -1,30 +1,31 @@
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using DataBase.Dtos;
-using DataBase.Interfaces;
+using System.Threading.Tasks;
 using Domain;
+using Repositories.Dtos;
+using Repositories.Interfaces;
+using Services.Interfaces;
 
-namespace DataBase
+namespace Services
 {
-    public class ContextService : IContextService
+    public class UserService : IUserService
     {
-        private readonly IRepository _repository;
+        private readonly IUserRepository _userRepository;
 
-        public ContextService(IRepository repository)
+        public UserService(IUserRepository userRepository)
         {
-            _repository = repository;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            IEnumerable<UserDto> usersDto = await _repository.GetUsersAsync();
+            IEnumerable<UserDto> usersDto = await _userRepository.GetUsersAsync();
             return usersDto.Select(userDto => MapUserDtoToDomain(userDto)).ToList();
         }
 
         public async Task<User> GetUserByUserNameAsync(string userName)
         {
-            UserDto userDto = await _repository.GetUsersByUserNameAsync(userName);
+            UserDto userDto = await _userRepository.GetUsersByUserNameAsync(userName);
             if (userDto != null)
             {
                 return MapUserDtoToDomain(userDto);
@@ -36,7 +37,7 @@ namespace DataBase
         public async Task<User> SaveUserAsync(User user)
         {
             UserDto userDto = MapUserDomainToDto(user);
-            var responseUserDto = await _repository.SaveUserAsync(userDto);
+            var responseUserDto = await _userRepository.SaveUserAsync(userDto);
             return MapUserDtoToDomain(responseUserDto);
         }
 
@@ -44,7 +45,7 @@ namespace DataBase
         {
             return new UserDto
             {
-                UserName = user.UserName,
+                Username = user.Username,
                 Password = user.Password,
                 Admin = user.Admin
             };
@@ -54,7 +55,7 @@ namespace DataBase
         {
             return new User
             {
-                UserName = userDto.UserName,
+                Username = userDto.Username,
                 Password = userDto.Password,
                 Admin = userDto.Admin
             };
