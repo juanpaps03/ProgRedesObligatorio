@@ -4,12 +4,8 @@ namespace Domain
 {
     public class Photo
     {
-        public User Client { get; set; }
+        public string Name { get; set; }
         public string File { get; set; }
-        public string Name { get; set;  }
-
-        public Photo()
-        {
-        }
+        public string Username { get; set; }
     }
 }

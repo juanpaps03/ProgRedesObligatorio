@@ -23,11 +23,12 @@ namespace SocketLibrary
             return (Response) await _msgCommunication.ReceiveMessageAsync();
         }
 
-        public async Task HandleRequestAsync(Func<Request, Response> handler)
+        public async Task HandleRequestAsync(Func<Request, Task<Response>> handler)
         {
             // TODO: add try catch to cast
-            Request request = (Request) await _msgCommunication.ReceiveMessageAsync();
-            await _msgCommunication.SendMessageAsync(handler(request));
+            var request = (Request) await _msgCommunication.ReceiveMessageAsync();
+            var response = await handler(request);
+            await _msgCommunication.SendMessageAsync(response);
         }
     }
 }

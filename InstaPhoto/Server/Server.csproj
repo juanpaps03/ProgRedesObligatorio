@@ -6,7 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Services\Services.csproj" />
       <ProjectReference Include="..\SocketLibrary\SocketLibrary.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.113.1" />
     </ItemGroup>
 
 </Project>

@@ -5,9 +5,9 @@ namespace SocketLibrary.Messages.Login
 {
     public class LoginRequestHandler: IContentHandler<LoginRequest>
     {
-        private NetworkCommunication _networkStream;
+        private INetworkCommunication _networkStream;
 
-        public LoginRequestHandler(NetworkCommunication networkStream)
+        public LoginRequestHandler(INetworkCommunication networkStream)
         {
             _networkStream = networkStream;
         }

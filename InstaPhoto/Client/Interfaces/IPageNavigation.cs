@@ -8,6 +8,7 @@ namespace Client.Interfaces
         const string LoginPage = "LoginPage";
         const string SignUpPage = "SignUpPage";
         const string HomePage = "HomePage";
+        const string UploadPhotoPage = "UploadPhoto";
         void GoToPage(string page, Dictionary<string, string> parameters = null);
 
         void Back();
