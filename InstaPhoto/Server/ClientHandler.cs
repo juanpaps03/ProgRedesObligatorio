@@ -70,6 +70,8 @@ namespace Server
                     Username = _clientUsername
                 });
                 Directory.CreateDirectory(Path.GetDirectoryName(photoPath));
+                if (File.Exists(photoPath)) 
+                    File.Delete(photoPath); // Trust only in the DB
                 File.Move(createPhotoRequest.FilePath, photoPath);
                 
                 return new CreatePhotoResponse();
