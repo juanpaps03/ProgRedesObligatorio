@@ -86,7 +86,7 @@ namespace SocketLibrary
             }
 
             // TODO Create a custom exception
-            throw new Exception();
+            throw new Exception("Message not recognized");
         }
     }
 }

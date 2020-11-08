@@ -30,7 +30,15 @@ namespace Client.Classes.Pages
 
         private void Navigate(string option)
         {
-            _navigation.Exit();
+            switch (option)
+            {
+                case UploadPhotoAction:
+                    _navigation.GoToPage(IPageNavigation.UploadPhotoPage);
+                    break;
+                default:
+                    _navigation.Exit();
+                    break;
+            }
         }
 
         public async Task RenderAsync()

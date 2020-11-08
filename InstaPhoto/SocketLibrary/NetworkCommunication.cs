@@ -44,7 +44,8 @@ namespace SocketLibrary
 
         public async Task SendShortAsync(short data)
         {
-            await SendLongAsync(data);
+            byte[] dataBytes = BitConverter.GetBytes(data);
+            await SendBytesAsync(dataBytes);
         }
 
         public async Task<short> ReceiveShortAsync()
@@ -55,7 +56,8 @@ namespace SocketLibrary
 
         public async Task SendIntAsync(int data)
         {
-            await SendLongAsync(data);
+            byte[] dataBytes = BitConverter.GetBytes(data);
+            await SendBytesAsync(dataBytes);
         }
 
         public async Task<int> ReceiveIntAsync()

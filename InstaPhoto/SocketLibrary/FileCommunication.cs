@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 
 namespace SocketLibrary
@@ -48,7 +49,7 @@ namespace SocketLibrary
             
             // Receive file chunks
             var path = Path.GetTempFileName();
-            await using var fileStream = File.OpenRead(path);
+            await using var fileStream = File.OpenWrite(path);
             
             var read = 0;
             byte[] buffer = null;

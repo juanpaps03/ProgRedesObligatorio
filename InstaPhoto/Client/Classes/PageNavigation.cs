@@ -2,12 +2,19 @@ using System;
 using System.Collections.Generic;
 using Client.Classes.Pages;
 using Client.Interfaces;
+using SocketLibrary;
 
 namespace Client.Classes
 {
     public class PageNavigation : IPageNavigation
     {
-        private Stack<IPage> _stack = new Stack<IPage>();
+        private readonly Stack<IPage> _stack = new Stack<IPage>();
+        private readonly ProtocolCommunication _protocolCommunication;
+
+        public PageNavigation(ProtocolCommunication protocolCommunication)
+        {
+            _protocolCommunication = protocolCommunication;
+        }
 
         public void GoToPage(string page, Dictionary<string, string> parameters = null)
         {
@@ -24,6 +31,9 @@ namespace Client.Classes
                     break;
                 case IPageNavigation.HomePage:
                     _stack.Push(new HomePage(this));
+                    break;
+                case IPageNavigation.UploadPhotoPage:
+                    _stack.Push(new UploadPhotoPage(this, _protocolCommunication));
                     break;
                 default:
                     throw new Exception($"Page {page} not found");
