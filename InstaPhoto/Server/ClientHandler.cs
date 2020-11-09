@@ -49,26 +49,28 @@ namespace Server
 
         private async Task<Response> HandleRequestAsync(Request request)
         {
-            switch (request)
+            return request switch
             {
-                case CreatePhotoRequest createPhotoRequest:
-                    return await HandleCreatePhotoAsync(createPhotoRequest);
-            } 
-            
-            return new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}");
+                CreatePhotoRequest createPhotoRequest => await HandleCreatePhotoAsync(createPhotoRequest),
+                _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
+            };
         }
 
         private async Task<Response> HandleCreatePhotoAsync(CreatePhotoRequest createPhotoRequest)
         {
-            var photoPath = $"photos/{_clientUsername}/{createPhotoRequest.Name}";
             try
             {
+                var photoPath = $"photos/{_clientUsername}/{createPhotoRequest.Name}";
+
+                // Persist photo
                 await _photoService.SavePhotoAsync(new Photo
                 {
                     Name = createPhotoRequest.Name,
                     File = photoPath,
                     Username = _clientUsername
                 });
+                
+                // Persist file
                 Directory.CreateDirectory(Path.GetDirectoryName(photoPath));
                 if (File.Exists(photoPath)) 
                     File.Delete(photoPath); // Trust only in the DB
@@ -78,10 +80,7 @@ namespace Server
             }
             catch (PhotoAlreadyExists e)
             {
-                return new ErrorResponse(
-                    ErrorId.PhotoNameAlreadyExists, 
-                    $"Photo with the name \"{createPhotoRequest.Name}\" already uploaded"
-                );
+                return new ErrorResponse(ErrorId.PhotoNameAlreadyExists, e.Message);
             }
         }
 
