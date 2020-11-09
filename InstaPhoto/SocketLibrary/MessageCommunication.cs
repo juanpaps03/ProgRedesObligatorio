@@ -68,7 +68,7 @@ namespace SocketLibrary
                 
                 default:
                     // TODO Create a custom exception
-                    throw new Exception();
+                    throw new Exception($"Message not recognized ID={msg.Id}, type={msg.Type}");
             }
         }
 
@@ -112,7 +112,7 @@ namespace SocketLibrary
             }
 
             // TODO Create a custom exception
-            throw new Exception("Message not recognized");
+            throw new Exception($"Message not recognized ID={messageId}, type={messageType}");
         }
     }
 }

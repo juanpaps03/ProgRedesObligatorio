@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -7,7 +6,6 @@ using System.Threading.Tasks;
 using Domain;
 using Exceptions;
 using Repositories;
-using Repositories.Interfaces;
 using Services;
 using Services.Interfaces;
 using SocketLibrary;
@@ -42,11 +40,11 @@ namespace Server
 
         public async Task ExecuteAsync()
         {
-            while (_clientUsername == null)
-                await _protocolCommunication.HandleRequestAsync(HandleLoginAsync);
+            // while (_clientUsername == null)
+            //     await _protocolCommunication.HandleRequestAsync(HandleLoginAsync);
 
             // >>>>>>> Para testear la subida de fotos, comentar el login y descomentar la linea de abajo
-            // _clientUsername = "admin";
+            _clientUsername = "admin";
 
             while (true) // TODO: CHANGE TO LOGOUT CONDITION
                 await _protocolCommunication.HandleRequestAsync(HandleRequestAsync);
@@ -73,7 +71,7 @@ namespace Server
 
             var photos = new List<Photo>(await _photoService.GetPhotosFromUserAsync(photoListRequest.Username));
 
-            return new PhotoListResponse(photos);
+            return new PhotoListResponse(photoListRequest.Username, photos);
         }
 
         private async Task<Response> HandleCreatePhotoAsync(CreatePhotoRequest createPhotoRequest)

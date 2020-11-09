@@ -23,7 +23,7 @@ namespace SocketLibrary.Messages.PhotoList
         public async Task SendMessageAsync(PhotoListResponse msg)
         {
             // All photos are from the same user
-            await _networkCommunication.SendStringAsync(msg.Photos.First().Username);
+            await _networkCommunication.SendStringAsync(msg.Username);
             
             // Send array of photos
             await _networkCommunication.SendIntAsync(msg.Photos.Count);
@@ -55,7 +55,7 @@ namespace SocketLibrary.Messages.PhotoList
                 });
             }
             
-            return new PhotoListResponse(photos);
+            return new PhotoListResponse(username, photos);
         }
     }
 }
