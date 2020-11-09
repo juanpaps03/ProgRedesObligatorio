@@ -12,7 +12,7 @@ namespace SocketLibrary.Messages.CreatePhoto
         public CreatePhotoRequestHandler(
             INetworkCommunication networkCommunication, 
             IFileCommunication fileCommunication
-            )
+        )
         {
             _networkCommunication = networkCommunication;
             _fileCommunication = fileCommunication;

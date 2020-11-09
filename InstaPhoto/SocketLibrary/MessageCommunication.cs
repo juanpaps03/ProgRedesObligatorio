@@ -7,6 +7,7 @@ using SocketLibrary.Messages;
 using SocketLibrary.Messages.CreatePhoto;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
+using SocketLibrary.Messages.PhotoList;
 
 namespace SocketLibrary
 {
@@ -51,6 +52,20 @@ namespace SocketLibrary
                     var createPhotoResponseHandler = new CreatePhotoResponseHandler();
                     await createPhotoResponseHandler.SendMessageAsync(createPhotoResponse);
                     break;
+                
+                // Photo list
+                case PhotoListRequest photoListRequest:
+                    var photoListRequestHandler = new PhotoListRequestHandler(_networkCommunication);
+                    await photoListRequestHandler.SendMessageAsync(photoListRequest);
+                    break;
+                case PhotoListResponse photoListResponse:
+                    var photoListResponseHandler = new PhotoListResponseHandler(
+                        _networkCommunication, 
+                        _fileCommunication
+                    );
+                    await photoListResponseHandler.SendMessageAsync(photoListResponse);
+                    break;
+                
                 default:
                     // TODO Create a custom exception
                     throw new Exception();
@@ -83,6 +98,17 @@ namespace SocketLibrary
                 case (MessageId.CreatePhoto, MessageType.Response):
                     var createPhotoResponseHandler = new CreatePhotoResponseHandler();
                     return await createPhotoResponseHandler.ReceiveMessageAsync();
+                
+                // Photo list
+                case (MessageId.PhotoList, MessageType.Request):
+                    var photoListRequestHandler = new PhotoListRequestHandler(_networkCommunication);
+                    return await photoListRequestHandler.ReceiveMessageAsync();
+                case (MessageId.PhotoList, MessageType.Response):
+                    var photoListResponseHandler = new PhotoListResponseHandler(
+                        _networkCommunication, 
+                        _fileCommunication
+                    );
+                    return await photoListResponseHandler.ReceiveMessageAsync();
             }
 
             // TODO Create a custom exception
