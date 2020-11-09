@@ -35,6 +35,9 @@ namespace Client.Classes
                 case IPageNavigation.UploadPhotoPage:
                     _stack.Push(new UploadPhotoPage(this, _protocolCommunication));
                     break;
+                case IPageNavigation.PhotoListPage:
+                    _stack.Push(new PhotoListPage(this, parameters, _protocolCommunication));
+                    break;
                 default:
                     throw new Exception($"Page {page} not found");
             }

@@ -29,7 +29,7 @@ namespace Repositories
             }
             catch (Exception e) when (e.Message.Contains("UNIQUE constraint failed"))
             {
-                throw new PhotoAlreadyExists();
+                throw new PhotoAlreadyExists($"Photo with the name \"{photoDto.Name}\" already uploaded");
             }
             catch (Exception e) when (e.Message.Contains("FOREIGN KEY constraint failed"))
             {
