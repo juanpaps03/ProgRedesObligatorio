@@ -88,7 +88,6 @@ namespace Client.Classes.Pages
                     _validLogin = true;
                     break;
             }
-
         }
 
         private void RenderRetry()

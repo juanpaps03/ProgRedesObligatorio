@@ -13,6 +13,7 @@ using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
 using SocketLibrary.Messages.CreatePhoto;
+using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
@@ -40,12 +41,6 @@ namespace Server
 
         public async Task ExecuteAsync()
         {
-            while (_clientUsername == null)
-                await _protocolCommunication.HandleRequestAsync(HandleLoginAsync);
-
-            // >>>>>>> Para testear la subida de fotos, comentar el login y descomentar la linea de abajo
-            _clientUsername = "admin";
-
             while (true) // TODO: CHANGE TO LOGOUT CONDITION
                 await _protocolCommunication.HandleRequestAsync(HandleRequestAsync);
         }
@@ -54,8 +49,10 @@ namespace Server
         {
             return request switch
             {
+                LoginRequest loginRequest => await HandleLoginAsync(loginRequest),
                 CreatePhotoRequest createPhotoRequest => await HandleCreatePhotoAsync(createPhotoRequest),
                 PhotoListRequest photoListRequest => await HandlePhotoListAsync(photoListRequest),
+                CreateUserRequest createUserRequest => await HandleCreateUserAsync(createUserRequest),
                 _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
             };
         }
@@ -101,14 +98,24 @@ namespace Server
                 return new ErrorResponse(ErrorId.PhotoNameAlreadyExists, e.Message);
             }
         }
-
-        private async Task<Response> HandleLoginAsync(Request request)
+        private async Task<Response> HandleCreateUserAsync(CreateUserRequest createUserRequest)
         {
-            return request switch
+            var user = new User()
             {
-                LoginRequest loginRequest => await HandleLoginAsync(loginRequest),
-                _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
+                Username = createUserRequest.UserName, 
+                Password = createUserRequest.Password,
+                Admin = false
             };
+
+            try
+            {
+                await _userService.SaveUserAsync(user);
+                return new CreateUserResponse();
+            }
+            catch(DatabaseSaveError)
+            {
+                return new ErrorResponse(ErrorId.UserAlreadyExists, "User already exists");
+            }
         }
 
         private async Task<Response> HandleLoginAsync(LoginRequest request)
