@@ -40,6 +40,11 @@ namespace SocketLibrary
                     await loginRequestHandler.SendMessageAsync(loginRequest);
                     break;
                 
+                case LoginResponse loginResponse:
+                    var loginResponseHandler = new LoginResponseHandler(_networkCommunication);
+                    await loginResponseHandler.SendMessageAsync(loginResponse);
+                    break;
+                
                 // Create photo
                 case CreatePhotoRequest createPhotoRequest:
                     var createPhotoRequestHandler = new CreatePhotoRequestHandler(
@@ -87,6 +92,10 @@ namespace SocketLibrary
                 case (MessageId.Login, MessageType.Request):
                     var loginRequestHandler = new LoginRequestHandler(_networkCommunication);
                     return await loginRequestHandler.ReceiveMessageAsync();
+                
+                case (MessageId.Login, MessageType.Response):
+                    var loginResponseHandler = new LoginResponseHandler(_networkCommunication);
+                    return await loginResponseHandler.ReceiveMessageAsync();
                 
                 // Create photo
                 case (MessageId.CreatePhoto, MessageType.Request):

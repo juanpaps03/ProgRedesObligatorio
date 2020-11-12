@@ -24,7 +24,7 @@ namespace Client.Classes
                     _stack.Push(new LandingPage(this));
                     break;
                 case IPageNavigation.LoginPage:
-                    _stack.Push(new LoginPage(this));
+                    _stack.Push(new LoginPage(this, _protocolCommunication));
                     break;
                 case IPageNavigation.SignUpPage:
                     _stack.Push(new SignUpPage(this));

@@ -40,8 +40,8 @@ namespace Server
 
         public async Task ExecuteAsync()
         {
-            // while (_clientUsername == null)
-            //     await _protocolCommunication.HandleRequestAsync(HandleLoginAsync);
+            while (_clientUsername == null)
+                await _protocolCommunication.HandleRequestAsync(HandleLoginAsync);
 
             // >>>>>>> Para testear la subida de fotos, comentar el login y descomentar la linea de abajo
             _clientUsername = "admin";
@@ -104,8 +104,22 @@ namespace Server
 
         private async Task<Response> HandleLoginAsync(Request request)
         {
-            // TODO: IMPLEMENT LOGIN
-            _clientUsername = "admin";
+            return request switch
+            {
+                LoginRequest loginRequest => await HandleLoginAsync(loginRequest),
+                _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
+            };
+        }
+
+        private async Task<Response> HandleLoginAsync(LoginRequest request)
+        {
+            User user = await _userService.GetUserByUserNameAsync(request.UserName);
+            if (user is null)
+                return new ErrorResponse(ErrorId.InvalidCredentials, "Invalid Credentials");
+            if (request.Password != user.Password) 
+                return new ErrorResponse(ErrorId.InvalidCredentials, "Invalid Credentials");
+            
+            _clientUsername = user.Username;
             return new LoginResponse();
         }
     }

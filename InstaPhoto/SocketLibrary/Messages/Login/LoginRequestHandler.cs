@@ -12,14 +12,17 @@ namespace SocketLibrary.Messages.Login
             _networkStream = networkStream;
         }
 
-        public Task SendMessageAsync(LoginRequest msg)
+        public async Task SendMessageAsync(LoginRequest login)
         {
-            throw new System.NotImplementedException();
+            await _networkStream.SendStringAsync(login.UserName);
+            await _networkStream.SendStringAsync(login.Password);
         }
 
-        public Task<LoginRequest> ReceiveMessageAsync()
+        public async Task<LoginRequest> ReceiveMessageAsync()
         {
-            throw new System.NotImplementedException();
+            string userName = await _networkStream.ReceiveStringAsync();
+            string password = await _networkStream.ReceiveStringAsync();
+            return new LoginRequest(userName, password);
         }
     }
 }

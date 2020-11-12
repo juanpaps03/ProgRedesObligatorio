@@ -66,6 +66,18 @@ namespace SocketLibrary
             return BitConverter.ToInt32(data, 0);
         }
 
+        public async Task SendBoolAsync(bool data)
+        {
+            byte[] dataBytes = BitConverter.GetBytes(data);
+            await SendBytesAsync(dataBytes);
+        }
+
+        public async Task<bool> ReceiveBoolAsync()
+        {
+            byte[] data = await ReceiveBytesAsync(1);
+            return BitConverter.ToBoolean(data, 0);
+        }
+
         public async Task SendLongAsync(long data)
         {
             byte[] dataBytes = BitConverter.GetBytes(data);

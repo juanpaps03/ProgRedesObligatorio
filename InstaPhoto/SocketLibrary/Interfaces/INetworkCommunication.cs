@@ -10,6 +10,8 @@ namespace SocketLibrary
         public Task<short> ReceiveShortAsync();
         public Task SendIntAsync(int data);
         public Task<int> ReceiveIntAsync();
+        public Task SendBoolAsync(bool data);
+        public Task<bool> ReceiveBoolAsync();
         public Task SendLongAsync(long data);
         public Task<long> ReceiveLongAsync();
         public Task SendStringAsync(string data);
