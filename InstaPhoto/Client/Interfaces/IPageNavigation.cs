@@ -10,6 +10,7 @@ namespace Client.Interfaces
         const string HomePage = "HomePage";
         const string UploadPhotoPage = "UploadPhoto";
         const string PhotoListPage = "PhotoListPage";
+        const string UserListPage = "UserListPage";
         void GoToPage(string page, Dictionary<string, string> parameters = null);
 
         void Back();
