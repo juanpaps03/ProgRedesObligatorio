@@ -52,5 +52,13 @@ namespace Repositories
 
             return photoDtoList;
         }
+
+        public async Task<PhotoDto> GetPhotoByNamePhotoAsync(string namePhoto)
+        {
+            _dbConnection.Open();
+            var photoDto = await _dbConnection.GetAsync<PhotoDto>(namePhoto);
+            _dbConnection.Close();
+            return photoDto;
+        }
     }
 }

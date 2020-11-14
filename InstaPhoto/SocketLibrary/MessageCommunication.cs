@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
+using SocketLibrary.Messages.CommentPhoto;
 using SocketLibrary.Messages.CreatePhoto;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
@@ -79,6 +80,18 @@ namespace SocketLibrary
                     await userListResponseHandler.SendMessageAsync(userListResponse);
                     break;
                 
+                // Comment photo
+                case CommentPhotoRequest commentPhotoRequest:
+                    var commentPhotoRequestHandler = new CommentPhotoRequestHandler(_networkCommunication);
+                    await commentPhotoRequestHandler.SendMessageAsync(commentPhotoRequest);
+                    break;
+                case CommentPhotoResponse commentPhotoResponse:
+                    var commentPhotoResponseHandler = new CommentPhotoResponseHandler(
+                        _networkCommunication
+                    );
+                    await commentPhotoResponseHandler.SendMessageAsync(commentPhotoResponse);
+                    break;
+                
                 default:
                     // TODO Create a custom exception
                     throw new Exception($"Message not recognized ID={msg.Id}, type={msg.Type}");
@@ -132,6 +145,16 @@ namespace SocketLibrary
                         _networkCommunication
                     );
                     return await userListResponseHandler.ReceiveMessageAsync();
+                
+                //Comment Photo
+                case (MessageId.CommentPhoto, MessageType.Request):
+                    var commentPhotoRequestHandler = new CommentPhotoRequestHandler(_networkCommunication);
+                    return await commentPhotoRequestHandler.ReceiveMessageAsync();
+                case (MessageId.CommentPhoto, MessageType.Response):
+                    var commentPhotoResponseHandler = new CommentPhotoResponseHandler(
+                        _networkCommunication
+                    );
+                    return await commentPhotoResponseHandler.ReceiveMessageAsync();
             }
 
             // TODO Create a custom exception

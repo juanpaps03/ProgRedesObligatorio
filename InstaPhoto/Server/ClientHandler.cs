@@ -17,6 +17,7 @@ using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
+using SocketLibrary.Messages.CommentPhoto;
 
 namespace Server
 {
@@ -28,6 +29,7 @@ namespace Server
 
         private readonly IPhotoService _photoService;
         private readonly IUserService _userService;
+        private readonly ICommentService _commentService;
 
         public ClientHandler(NetworkStream stream, IDbConnection dbConnection)
         {
@@ -35,6 +37,8 @@ namespace Server
             _photoService = new PhotoService(photoRepository);
             var userRepository = new UserRepository(dbConnection);
             _userService = new UserService(userRepository);
+            var commentRepository = new CommentRepository(dbConnection);
+            _commentService = new CommentService(commentRepository);
 
             _protocolCommunication = new ProtocolCommunication(stream);
         }
@@ -58,6 +62,7 @@ namespace Server
                 CreatePhotoRequest createPhotoRequest => await HandleCreatePhotoAsync(createPhotoRequest),
                 PhotoListRequest photoListRequest => await HandlePhotoListAsync(photoListRequest),
                 UserListRequest userListRequest => await HandleUserListAsync(),
+                CommentPhotoRequest commentPhotoRequest => await HandleCommentPhotoAsync(commentPhotoRequest),
                 _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
             };
         }
@@ -116,6 +121,43 @@ namespace Server
             // TODO: IMPLEMENT LOGIN
             _clientUsername = "admin";
             return new LoginResponse();
+        }
+        
+        private async Task<Response> HandleCommentPhotoAsync(CommentPhotoRequest commentPhotoRequest)
+        {
+            try
+            {
+                var user = await _userService.GetUserByUserNameAsync(commentPhotoRequest.UserName);
+                if (user == null)
+                    return new ErrorResponse(
+                        ErrorId.UserNotFound,
+                        $"The user {commentPhotoRequest.UserName} doesn't exist"
+                    );
+                var photo = await _photoService.GetPhotoByNamePhotoAsync(commentPhotoRequest.NamePhoto);
+                if (photo == null)
+                    return new ErrorResponse(
+                        ErrorId.PhotoNotExist,
+                        $"The photo {commentPhotoRequest.NamePhoto} doesn't exist"
+                    );
+                
+                // Guardo comentario
+                await _commentService.SaveCommentAsync(new Comment
+                {
+                    NamePhoto = commentPhotoRequest.NamePhoto,
+                    UserName = commentPhotoRequest.UserName,
+                    Text = commentPhotoRequest.Text
+                });
+
+                return new CommentPhotoResponse();
+            }
+            catch (UserNotFound e)
+            {
+                return new ErrorResponse(ErrorId.UserNotFound, e.Message);
+            }
+            catch (PhotoNotExist e)
+            {
+                return new ErrorResponse(ErrorId.PhotoNotExist, e.Message);
+            }
         }
     }
 }

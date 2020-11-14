@@ -40,6 +40,17 @@ namespace Services
             return photoDtoList.Select(MapDtoToModel);
         }
 
+        public async Task<Photo> GetPhotoByNamePhotoAsync(string namePhoto)
+        {
+            var photoDto = await _photoRepository.GetPhotoByNamePhotoAsync(namePhoto);
+            if (photoDto != null)
+            {
+                return MapDtoToModel(photoDto);
+            }
+
+            return null;
+        }
+
         private Photo MapDtoToModel(PhotoDto resultDto)
         {
             return _mapper.Map<Photo>(resultDto);
