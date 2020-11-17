@@ -7,7 +7,7 @@ namespace Services.Interfaces
     public interface ICommentService
     {
         Task<IEnumerable<Comment>> GetCommentsAsync();
-        Task<Comment> GetCommentByPhotoNameAsync(string namePhoto);
+        Task<IEnumerable<Comment>> GetCommentsByNamePhotoAsync(string namePhoto);
         Task<Comment> SaveCommentAsync(Comment comment);
     }
 }

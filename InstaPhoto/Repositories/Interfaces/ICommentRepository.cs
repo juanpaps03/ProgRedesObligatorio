@@ -7,7 +7,7 @@ namespace Repositories.Interfaces
     public interface ICommentRepository
     {
         Task<IEnumerable<CommentDto>> GetCommentsAsync();
-        Task<CommentDto> GetCommentByPhotoNameAsync(string namePhoto);
+        Task<IEnumerable<CommentDto>> GetCommentByNamePhotoAsync(string namePhoto);
         Task<CommentDto> SaveCommentAsync(CommentDto commentDto);
 
     }

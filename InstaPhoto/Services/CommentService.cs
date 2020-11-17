@@ -23,15 +23,11 @@ namespace Services
             return commentsDto.Select(commentDto => MapCommentDtoToDomain(commentDto)).ToList();
         }
 
-        public async Task<Comment> GetCommentByPhotoNameAsync(string namePhoto)
+        public async Task<IEnumerable<Comment>> GetCommentsByNamePhotoAsync(string namePhoto)
         {
-            CommentDto commentDto = await _commentRepository.GetCommentByPhotoNameAsync(namePhoto);
-            if (commentDto != null)
-            {
-                return MapCommentDtoToDomain(commentDto);
-            }
-
-            return null;
+            var commentDtoList = await _commentRepository.GetCommentByNamePhotoAsync(namePhoto);
+            return commentDtoList.Select(commentDto => MapCommentDtoToDomain(commentDto)).ToList();
+            
         }
 
         public async Task<Comment> SaveCommentAsync(Comment comment)
@@ -60,5 +56,6 @@ namespace Services
                 Text = commentDto.Text
             };
         }
+        
     }
 }

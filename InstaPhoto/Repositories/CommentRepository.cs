@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Dapper;
 using Dapper.Contrib.Extensions;
 using Repositories.Dtos;
 using Repositories.Interfaces;
@@ -24,12 +25,14 @@ namespace Repositories
             return comments;
         }
     
-        public async Task<CommentDto> GetCommentByPhotoNameAsync(string namePhoto)
+        public async Task<IEnumerable<CommentDto>> GetCommentByNamePhotoAsync(string namePhoto)
         {
             _dbConnection.Open();
-            CommentDto commentDto = await _dbConnection.GetAsync<CommentDto>(namePhoto);
+            var commentDtoList = await _dbConnection.QueryAsync<CommentDto>(
+                sql: "SELECT * FROM Comment WHERE NamePhoto = @NamePhoto",
+                param: new {NamePhoto = namePhoto});
             _dbConnection.Close();
-            return commentDto;
+            return commentDtoList;
         }
 
         public async Task<CommentDto> SaveCommentAsync(CommentDto commentDto)

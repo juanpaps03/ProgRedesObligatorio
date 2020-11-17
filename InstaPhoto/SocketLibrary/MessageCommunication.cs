@@ -10,6 +10,7 @@ using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
+using SocketLibrary.Messages.CommentList;
 
 namespace SocketLibrary
 {
@@ -91,7 +92,17 @@ namespace SocketLibrary
                     );
                     await commentPhotoResponseHandler.SendMessageAsync(commentPhotoResponse);
                     break;
-                
+                // Comment List
+                case CommentListRequest commentListRequest:
+                    var commentListRequestHandler = new CommentListRequestHandler(_networkCommunication);
+                    await commentListRequestHandler.SendMessageAsync(commentListRequest);
+                    break;
+                case CommentListResponse commentListResponse:
+                    var commentListResponseHandler = new CommentListResponseHandler(
+                        _networkCommunication
+                    );
+                    await commentListResponseHandler.SendMessageAsync(commentListResponse);
+                    break;
                 default:
                     // TODO Create a custom exception
                     throw new Exception($"Message not recognized ID={msg.Id}, type={msg.Type}");
@@ -155,6 +166,15 @@ namespace SocketLibrary
                         _networkCommunication
                     );
                     return await commentPhotoResponseHandler.ReceiveMessageAsync();
+                //Comment List
+                case (MessageId.CommentList, MessageType.Request):
+                    var commentListRequestHandler = new CommentListRequestHandler(_networkCommunication);
+                    return await commentListRequestHandler.ReceiveMessageAsync();
+                case (MessageId.CommentList, MessageType.Response):
+                    var commentListResponseHandler = new CommentListResponseHandler(
+                        _networkCommunication
+                    );
+                    return await commentListResponseHandler.ReceiveMessageAsync();
             }
 
             // TODO Create a custom exception

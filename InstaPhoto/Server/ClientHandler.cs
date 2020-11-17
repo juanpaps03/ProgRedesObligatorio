@@ -12,12 +12,14 @@ using SocketLibrary;
 using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
+using SocketLibrary.Messages.CommentList;
 using SocketLibrary.Messages.CreatePhoto;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
 using SocketLibrary.Messages.CommentPhoto;
+using SocketLibrary.Messages.CommentList;
 
 namespace Server
 {
@@ -63,6 +65,7 @@ namespace Server
                 PhotoListRequest photoListRequest => await HandlePhotoListAsync(photoListRequest),
                 UserListRequest userListRequest => await HandleUserListAsync(),
                 CommentPhotoRequest commentPhotoRequest => await HandleCommentPhotoAsync(commentPhotoRequest),
+                CommentListRequest commentListRequest => await HandleCommentListAsync(commentListRequest),
                 _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
             };
         }
@@ -158,6 +161,20 @@ namespace Server
             {
                 return new ErrorResponse(ErrorId.PhotoNotExist, e.Message);
             }
+        }
+        
+        private async Task<Response> HandleCommentListAsync(CommentListRequest commentListRequest)
+        {
+            var photo = await _photoService.GetPhotoByNamePhotoAsync(commentListRequest.Namephoto);
+            if (photo == null)
+                return new ErrorResponse(
+                    ErrorId.PhotoNotExist,
+                    $"The photo {commentListRequest.Namephoto} doesn't exist"
+                );
+
+            var comments = new List<Comment>(await _commentService.GetCommentsByNamePhotoAsync(commentListRequest.Namephoto));
+
+            return new CommentListResponse(commentListRequest.Namephoto, comments);
         }
     }
 }
