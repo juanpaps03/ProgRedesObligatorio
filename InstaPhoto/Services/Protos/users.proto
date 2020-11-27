@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package users;
+
+service Users {
+  rpc GetUsers (GetUsersRequest) returns (GetUsersReply);
+  rpc GetUserByUserName (GetUserByUserNameRequest) returns (GetUserByUserNameReply);
+  rpc SaveUser (SaveUserRequest) returns (SaveUserReply);
+}
+
+// User
+message UserMessage {
+  string Username = 1;
+  string Password = 2;
+  bool Admin = 3;
+}
+
+// Get user
+message GetUsersRequest {}
+
+message GetUsersReply {
+  repeated UserMessage UserList = 1;
+}
+
+// Get user by username
+message GetUserByUserNameRequest {
+  string username = 1;
+}
+
+message GetUserByUserNameReply {
+  UserMessage user = 1;
+}
+
+// Save user
+message SaveUserRequest {
+  UserMessage user = 1;
+}
+
+message SaveUserReply {
+  UserMessage user = 1;
+}
+
