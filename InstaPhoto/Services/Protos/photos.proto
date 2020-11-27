@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package photos;
+
+service Photos {
+  rpc SavePhoto (SavePhotoRequest) returns (SavePhotoReply);
+  rpc GetPhotosFromUser (GetPhotosFromUserRequest) returns (GetPhotosFromUserReply);
+}
+
+// Photos
+message PhotoMessage {
+  string Name = 1;
+  string File = 2;
+  string Username = 3;
+}
+
+// Save Photo
+message SavePhotoRequest {
+  PhotoMessage Photo = 1;
+}
+
+message SavePhotoReply {
+  PhotoMessage Photo = 1;
+}
+
+// Get user photos
+message GetPhotosFromUserRequest {
+  string Username = 1;
+}
+
+message GetPhotosFromUserReply {
+  repeated PhotoMessage PhotoList = 1;
+}

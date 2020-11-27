@@ -16,13 +16,13 @@ namespace InstaPhoto
         static async Task Main(string[] args)
         {
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            IUserService userService = new UserServiceGrpcClient(channel);
+            IPhotoService photoService = new PhotoServiceGrpcClient(channel);
 
-            var users = await userService.GetUsersAsync();
+            var photos = await photoService.GetPhotosFromUserAsync("potato");
 
-            foreach (var user in users)
+            foreach (var photo in photos)
             {
-                Console.WriteLine($"{user.Username} - Pass: {user.Password}");
+                Console.WriteLine($"{photo.Name} - {photo.File}");
             }
 
 

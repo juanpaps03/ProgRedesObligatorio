@@ -28,7 +28,7 @@ namespace GrpcServer
         public void ConfigureServices(IServiceCollection services)
         {
             // Database
-            // FIXME: GET CONNECTION STRING FROM SETTINGS
+            // TODO: GET CONNECTION STRING FROM SETTINGS
             // string connectionString = _configuration.GetConnectionString("universityDb");
             const string connectionString =
                 @"Data Source=/home/diego/ORT/ProgRedes/ProgRedesObligatorio/dbInstaPhoto.db;foreign keys=true;Version=3;";
@@ -36,9 +36,11 @@ namespace GrpcServer
 
             // Local repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             
             // Local services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPhotoService, PhotoService>();
             
             // Add gRPC services
             services.AddGrpc();
@@ -57,6 +59,7 @@ namespace GrpcServer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<UserGrpcService>();
+                endpoints.MapGrpcService<PhotoGrpcService>();
 
                 endpoints.MapGet("/",
                     async context =>
