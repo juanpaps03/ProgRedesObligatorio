@@ -9,12 +9,12 @@ using Services.Interfaces;
 
 namespace Services
 {
-    public class UserServiceGrpcClient : IUserService
+    public class UserServiceRemote : IUserService
     {
         private readonly Users.UsersClient _client;
         private readonly IMapper _mapper;
 
-        public UserServiceGrpcClient(ChannelBase channel)
+        public UserServiceRemote(ChannelBase channel)
         {
             _client = new Users.UsersClient(channel);
 

@@ -32,9 +32,9 @@ namespace Server
         public ClientHandler(NetworkStream stream, IDbConnection dbConnection)
         {
             var photoRepository = new PhotoRepository(dbConnection);
-            _photoService = new PhotoService(photoRepository);
+            _photoService = new PhotoServiceLocal(photoRepository);
             var userRepository = new UserRepository(dbConnection);
-            _userService = new UserService(userRepository);
+            _userService = new UserServiceLocal(userRepository);
 
             _protocolCommunication = new ProtocolCommunication(stream);
         }

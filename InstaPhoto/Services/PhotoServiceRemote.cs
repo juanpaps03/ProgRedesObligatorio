@@ -8,12 +8,12 @@ using Services.Interfaces;
 
 namespace Services
 {
-    public class PhotoServiceGrpcClient : IPhotoService
+    public class PhotoServiceRemote : IPhotoService
     {
         private readonly Photos.PhotosClient _client;
         private readonly IMapper _mapper;
 
-        public PhotoServiceGrpcClient(ChannelBase channel)
+        public PhotoServiceRemote(ChannelBase channel)
         {
             _client = new Photos.PhotosClient(channel);
 

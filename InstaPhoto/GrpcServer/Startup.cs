@@ -36,8 +36,8 @@ namespace GrpcServer
             services.AddScoped<IPhotoRepository, PhotoRepository>();
             
             // Local services
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IUserService, UserServiceLocal>();
+            services.AddScoped<IPhotoService, PhotoServiceLocal>();
             
             // Add gRPC services
             services.AddGrpc();

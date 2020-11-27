@@ -16,7 +16,7 @@ namespace InstaPhoto
         static async Task Main(string[] args)
         {
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            IPhotoService photoService = new PhotoServiceGrpcClient(channel);
+            IPhotoService photoService = new PhotoServiceRemote(channel);
 
             var photos = await photoService.GetPhotosFromUserAsync("potato");
 
