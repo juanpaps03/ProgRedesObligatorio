@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Data.SQLite;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Grpc.Net.Client;
 using SocketLibrary.Constants;
 
 namespace Server
@@ -11,9 +11,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            const string connectionString =
-                @"Data Source=/home/diego/ORT/ProgRedes/ProgRedesObligatorio/dbInstaPhoto.db;foreign keys=true;Version=3;";
-            var connection = new SQLiteConnection(connectionString);
+            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
 
             var tcpListener = new TcpListener(new IPEndPoint(IPAddress.Parse("127.0.0.1"), ProtocolSpecification.Port));
             tcpListener.Start(20);
@@ -22,7 +20,7 @@ namespace Server
                 var tcpClient = tcpListener.AcceptTcpClient();
                 var clientHandler = new ClientHandler(
                     stream: tcpClient.GetStream(),
-                    connection
+                    channel
                 );
                 clientHandler.ExecuteAsync().ContinueWith(
                     t => Console.WriteLine(t.Exception),

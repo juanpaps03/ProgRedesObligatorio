@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using Domain;
 using Exceptions;
+using Grpc.Core;
 using Repositories;
 using Services;
 using Services.Interfaces;
@@ -29,12 +30,10 @@ namespace Server
         private readonly IPhotoService _photoService;
         private readonly IUserService _userService;
 
-        public ClientHandler(NetworkStream stream, IDbConnection dbConnection)
+        public ClientHandler(NetworkStream stream, ChannelBase channel)
         {
-            var photoRepository = new PhotoRepository(dbConnection);
-            _photoService = new PhotoServiceLocal(photoRepository);
-            var userRepository = new UserRepository(dbConnection);
-            _userService = new UserServiceLocal(userRepository);
+            _photoService = new PhotoServiceRemote(channel);
+            _userService = new UserServiceRemote(channel);
 
             _protocolCommunication = new ProtocolCommunication(stream);
         }
