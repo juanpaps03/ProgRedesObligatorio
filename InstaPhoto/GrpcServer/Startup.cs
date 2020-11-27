@@ -28,10 +28,7 @@ namespace GrpcServer
         public void ConfigureServices(IServiceCollection services)
         {
             // Database
-            // TODO: GET CONNECTION STRING FROM SETTINGS
-            // string connectionString = _configuration.GetConnectionString("universityDb");
-            const string connectionString =
-                @"Data Source=/home/diego/ORT/ProgRedes/ProgRedesObligatorio/dbInstaPhoto.db;foreign keys=true;Version=3;";
+            var connectionString = _configuration.GetConnectionString("instaPhotoDb");
             services.AddTransient<IDbConnection>(serviceProvider => new SQLiteConnection(connectionString));
 
             // Local repositories
