@@ -10,8 +10,6 @@ namespace Client.Classes.Pages
         private const string UploadPhotoAction = "U";
         private const string UsersListAction = "L";
         private const string LogOutAction = "X";
-        private const string CommentPhotoAction = "C";
-        private const string CommentListAction = "M";
 
         private readonly IPageNavigation _navigation;
         private readonly Menu _menu;
@@ -24,8 +22,6 @@ namespace Client.Classes.Pages
                 {
                     (UploadPhotoAction, "Upload new photo"),
                     (UsersListAction, "Show users"),
-                    (CommentPhotoAction, "Comment Photo"),
-                    (CommentListAction, "Show comments photo"),
                     (LogOutAction, "Logout"),
                 },
                 Navigate
@@ -41,12 +37,6 @@ namespace Client.Classes.Pages
                     break;
                 case UsersListAction:
                     _navigation.GoToPage(IPageNavigation.UserListPage);
-                    break;
-                case CommentPhotoAction:
-                    _navigation.GoToPage(IPageNavigation.CommentPhotoPage);
-                    break;
-                case CommentListAction:
-                    _navigation.GoToPage(IPageNavigation.CommentListPage);
                     break;
                 default:
                     _navigation.Exit();

@@ -15,7 +15,8 @@ namespace Client.Classes.Pages
         private readonly PageNavigation _navigation;
         private readonly IProtocolCommunication _protocolCommunication;
 
-        private readonly string _namePhoto;
+        private readonly string _username;
+        private readonly string _photoName;
         private Menu _commentListMenu;
 
         public CommentListPage(
@@ -26,17 +27,25 @@ namespace Client.Classes.Pages
         {
             _navigation = navigation;
             _protocolCommunication = protocolCommunication;
-            parameters.TryGetValue("namePhoto", out _namePhoto);
-
-            if (_namePhoto == null)
+            parameters.TryGetValue("username", out _username);
+            if (_username == null)
             {
-                throw new Exception("Parameter \"namePhoto\" required");
+                throw new Exception("Parameter \"username\" required");
+            }
+
+            parameters.TryGetValue("photoName", out _photoName);
+            if (_photoName == null)
+            {
+                throw new Exception("Parameter \"photoName\" required");
             }
         }
 
         public async Task RenderAsync()
         {
-            ConsoleHelper.WriteLine($"Photo list from {_namePhoto}\n", ConsoleColor.Cyan);
+            ConsoleHelper.WriteLine(
+                $"Comment list from \"{_photoName}\" from \"{_username}\"\n", 
+                ConsoleColor.Cyan
+            );
 
             if (_commentListMenu == null)
             {
@@ -52,7 +61,7 @@ namespace Client.Classes.Pages
         {
             ConsoleHelper.WriteLine("Loading...\n", ConsoleColor.Yellow);
 
-            var response = await _protocolCommunication.SendRequestAsync(new CommentListRequest(_namePhoto));
+            var response = await _protocolCommunication.SendRequestAsync(new CommentListRequest(_photoName)); // TODO: FIX ADD USERNAME
 
             switch (response)
             {
@@ -71,7 +80,7 @@ namespace Client.Classes.Pages
                     
                     _commentListMenu = new Menu(
                         options: commentList,
-                        onSelect: s => { }, // TODO: ADD NEW PAGE TO SEE COMMENTS AND ADD NEW
+                        onSelect: s => {},
                         onEscPressed: () => _navigation.Back(),
                         escapeActionName: "Go back"
                     );

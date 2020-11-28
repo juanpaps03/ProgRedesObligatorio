@@ -17,8 +17,8 @@ namespace Client.Classes.Pages
         private const string GoBackAction = "goBack";
 
         private bool _retry;
-        private string _userName;
-        private string _namePhoto;
+        private readonly string _username;
+        private readonly string _photoName;
         private string _text;
         private string _error;
 
@@ -29,11 +29,24 @@ namespace Client.Classes.Pages
 
         public CommentPhotoPage(
             IPageNavigation navigation,
+            IDictionary<string, string> parameters,
             IProtocolCommunication protocolCommunication
         )
         {
             _navigation = navigation;
             _protocolCommunication = protocolCommunication;
+
+            parameters.TryGetValue("username", out _username);
+            if (_username == null)
+            {
+                throw new Exception("Parameter \"username\" required");
+            }
+
+            parameters.TryGetValue("photoName", out _photoName);
+            if (_photoName == null)
+            {
+                throw new Exception("Parameter \"photoName\" required");
+            }
 
             _retryMenu = new Menu(
                 options: new List<(string, string)>
@@ -57,17 +70,12 @@ namespace Client.Classes.Pages
 
         private async Task RenderCommentPhotoAsync()
         {
-            ConsoleHelper.Write("Image name: ");
-            _namePhoto = ConsoleHelper.ReadLine();
             ConsoleHelper.Write("Comment: ");
             _text = ConsoleHelper.ReadLine();
-            ConsoleHelper.Write("UserName: ");
-            _userName = ConsoleHelper.ReadLine();
 
-            
             ConsoleHelper.Write("\nUploading... ", ConsoleColor.Yellow);
             Response response = await _protocolCommunication.SendRequestAsync(
-                new CommentPhotoRequest(_namePhoto, _userName, _text)
+                new CommentPhotoRequest(_photoName, _username, _text)
             );
 
             switch (response)
@@ -88,7 +96,6 @@ namespace Client.Classes.Pages
                     _retry = true;
                     break;
             }
-            
         }
 
         private async Task RenderRetryAsync()

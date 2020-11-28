@@ -75,10 +75,20 @@ namespace Client.Classes.Pages
 
                         photoList.Add((photo.Name, $"{photo.Name} - {photoPath}"));
                     }
-                    
+
                     _photoListMenu = new Menu(
                         options: photoList,
-                        onSelect: s => { }, // TODO: ADD NEW PAGE TO SEE COMMENTS AND ADD NEW
+                        onSelect: photoName =>
+                        {
+                            _navigation.GoToPage(
+                                IPageNavigation.PhotoDetailsPage,
+                                new Dictionary<string, string>
+                                {
+                                    {"username", _username},
+                                    {"photoName", photoName},
+                                }
+                            );
+                        },
                         onEscPressed: () => _navigation.Back(),
                         escapeActionName: "Go back"
                     );
