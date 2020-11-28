@@ -38,6 +38,9 @@ namespace Client.Classes
                 case IPageNavigation.PhotoListPage:
                     _stack.Push(new PhotoListPage(this, parameters, _protocolCommunication));
                     break;
+                case IPageNavigation.UserListPage:
+                    _stack.Push(new UserListPage(this, _protocolCommunication));
+                    break;
                 default:
                     throw new Exception($"Page {page} not found");
             }

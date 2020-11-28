@@ -9,6 +9,7 @@ using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
+using SocketLibrary.Messages.UserList;
 
 namespace SocketLibrary
 {
@@ -83,6 +84,18 @@ namespace SocketLibrary
                     await photoListResponseHandler.SendMessageAsync(photoListResponse);
                     break;
                 
+                // User list
+                case UserListRequest userListRequest:
+                    var userListRequestHandler = new UserListRequestHandler(_networkCommunication);
+                    await userListRequestHandler.SendMessageAsync(userListRequest);
+                    break;
+                case UserListResponse userListResponse:
+                    var userListResponseHandler = new UserListResponseHandler(
+                        _networkCommunication
+                    );
+                    await userListResponseHandler.SendMessageAsync(userListResponse);
+                    break;
+                
                 default:
                     // TODO Create a custom exception
                     throw new Exception($"Message not recognized ID={msg.Id}, type={msg.Type}");
@@ -139,6 +152,16 @@ namespace SocketLibrary
                         _fileCommunication
                     );
                     return await photoListResponseHandler.ReceiveMessageAsync();
+                
+                //User list
+                case (MessageId.UserList, MessageType.Request):
+                    var userListRequestHandler = new UserListRequestHandler(_networkCommunication);
+                    return await userListRequestHandler.ReceiveMessageAsync();
+                case (MessageId.UserList, MessageType.Response):
+                    var userListResponseHandler = new UserListResponseHandler(
+                        _networkCommunication
+                    );
+                    return await userListResponseHandler.ReceiveMessageAsync();
             }
 
             // TODO Create a custom exception

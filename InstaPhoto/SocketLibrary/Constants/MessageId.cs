@@ -6,7 +6,7 @@ namespace SocketLibrary.Constants
         CreateUser = 102,
         CreatePhoto = 103,
         PhotoList = 105,
-        
+        UserList = 104,
         Error = 900
     }
 }

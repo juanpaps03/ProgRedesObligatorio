@@ -17,6 +17,7 @@ using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
+using SocketLibrary.Messages.UserList;
 
 namespace Server
 {
@@ -53,10 +54,19 @@ namespace Server
                 CreatePhotoRequest createPhotoRequest => await HandleCreatePhotoAsync(createPhotoRequest),
                 PhotoListRequest photoListRequest => await HandlePhotoListAsync(photoListRequest),
                 CreateUserRequest createUserRequest => await HandleCreateUserAsync(createUserRequest),
+                UserListRequest userListRequest => await HandleUserListAsync(),
+
                 _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
             };
         }
 
+        private async Task<Response> HandleUserListAsync()
+        {
+            var users = new List<User>(await _userService.GetUsersAsync());
+
+            return new UserListResponse(users);
+        }
+        
         private async Task<Response> HandlePhotoListAsync(PhotoListRequest photoListRequest)
         {
             var user = await _userService.GetUserByUserNameAsync(photoListRequest.Username);
