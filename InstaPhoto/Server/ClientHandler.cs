@@ -19,7 +19,6 @@ using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
 using SocketLibrary.Messages.CommentPhoto;
-using SocketLibrary.Messages.CommentList;
 
 namespace Server
 {

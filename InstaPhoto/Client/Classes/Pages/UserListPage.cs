@@ -54,7 +54,7 @@ namespace Client.Classes.Pages
                     var userList = new List<(string, string)>();
                     foreach (var user in userListResponse.Users)
                     {
-                        userList.Add((user.Username, ""));
+                        userList.Add((user.Username, user.Username));
                     }
                     
                     _userListMenu = new Menu(

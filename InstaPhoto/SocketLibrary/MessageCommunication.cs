@@ -71,7 +71,7 @@ namespace SocketLibrary
                 
                 // User list
                 case UserListRequest userListRequest:
-                    var userListRequestHandler = new UserListRequestHandler(_networkCommunication);
+                    var userListRequestHandler = new UserListRequestHandler();
                     await userListRequestHandler.SendMessageAsync(userListRequest);
                     break;
                 case UserListResponse userListResponse:
@@ -149,7 +149,7 @@ namespace SocketLibrary
                 
                 //User list
                 case (MessageId.UserList, MessageType.Request):
-                    var userListRequestHandler = new UserListRequestHandler(_networkCommunication);
+                    var userListRequestHandler = new UserListRequestHandler();
                     return await userListRequestHandler.ReceiveMessageAsync();
                 case (MessageId.UserList, MessageType.Response):
                     var userListResponseHandler = new UserListResponseHandler(

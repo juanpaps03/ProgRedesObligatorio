@@ -35,12 +35,11 @@ namespace SocketLibrary.Messages.UserList
             for (var i = 0; i < count; i++)
             {
                 var userName = await _networkCommunication.ReceiveStringAsync();
-                var password = await _networkCommunication.ReceiveStringAsync();
 
                 users.Add(new User
                 {
                     Username = userName,
-                    Password = password
+                    Password = "*****"
                 });
             }
             
