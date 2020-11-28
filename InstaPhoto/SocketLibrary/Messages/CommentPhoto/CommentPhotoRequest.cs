@@ -1,8 +1,6 @@
-using System;
-using System.IO;
 using SocketLibrary.Constants;
 
-namespace SocketLibrary.Messages.CreatePhoto
+namespace SocketLibrary.Messages.CommentPhoto
 {
     public class CommentPhotoRequest : Request
     {

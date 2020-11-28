@@ -43,7 +43,7 @@ namespace Client.Classes.Pages
         public async Task RenderAsync()
         {
             ConsoleHelper.WriteLine(
-                $"Comment list from \"{_photoName}\" from \"{_username}\"\n", 
+                $"Comment list from \"{_photoName}\" from \"{_username}\"\n",
                 ConsoleColor.Cyan
             );
 
@@ -61,7 +61,9 @@ namespace Client.Classes.Pages
         {
             ConsoleHelper.WriteLine("Loading...\n", ConsoleColor.Yellow);
 
-            var response = await _protocolCommunication.SendRequestAsync(new CommentListRequest(_photoName)); // TODO: FIX ADD USERNAME
+            var response = await _protocolCommunication.SendRequestAsync(
+                new CommentListRequest(_username, _photoName)
+            );
 
             switch (response)
             {
@@ -75,12 +77,12 @@ namespace Client.Classes.Pages
                     var commentList = new List<(string, string)>();
                     foreach (var comment in commentListResponse.Comments)
                     {
-                        commentList.Add((comment.NamePhoto, $"{comment.Text}"));
+                        commentList.Add(($"{comment.Username},{comment.PhotoName}", $"{comment.Text}"));
                     }
-                    
+
                     _commentListMenu = new Menu(
                         options: commentList,
-                        onSelect: s => {},
+                        onSelect: s => { },
                         onEscPressed: () => _navigation.Back(),
                         escapeActionName: "Go back"
                     );

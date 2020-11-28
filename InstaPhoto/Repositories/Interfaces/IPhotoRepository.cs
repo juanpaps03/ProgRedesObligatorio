@@ -8,6 +8,6 @@ namespace Repositories.Interfaces
     {
         Task<PhotoDto> SavePhotoDtoAsync(PhotoDto photoDto);
         Task<IEnumerable<PhotoDto>> GetPhotosFromUserAsync(string username);
-        Task<PhotoDto> GetPhotoByNamePhotoAsync(string namePhoto);
+        Task<PhotoDto> GetPhotoByPhotoNameAsync(string username, string photoName);
     }
 }

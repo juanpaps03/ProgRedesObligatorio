@@ -1,13 +1,11 @@
-using System;
 using System.Threading.Tasks;
 using SocketLibrary.Interfaces;
 
-namespace SocketLibrary.Messages.CreatePhoto
+namespace SocketLibrary.Messages.CommentPhoto
 {
     public class CommentPhotoRequestHandler: IContentHandler<CommentPhotoRequest>
     {
         private readonly INetworkCommunication _networkCommunication;
-        private readonly IFileCommunication _fileCommunication;
 
         public CommentPhotoRequestHandler(
             INetworkCommunication networkCommunication
@@ -18,6 +16,8 @@ namespace SocketLibrary.Messages.CreatePhoto
 
         public async Task SendMessageAsync(CommentPhotoRequest msg)
         {
+            await _networkCommunication.SendStringAsync(msg.NamePhoto);
+            await _networkCommunication.SendStringAsync(msg.UserName);
             await _networkCommunication.SendStringAsync(msg.Text);
         }
 

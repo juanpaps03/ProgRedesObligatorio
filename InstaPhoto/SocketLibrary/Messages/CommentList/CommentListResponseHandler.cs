@@ -20,7 +20,8 @@ namespace SocketLibrary.Messages.CommentList
         public async Task SendMessageAsync(CommentListResponse msg)
         {
             // All comments are from the same photo
-            await _networkCommunication.SendStringAsync(msg.Namephoto);
+            await _networkCommunication.SendStringAsync(msg.Username);
+            await _networkCommunication.SendStringAsync(msg.PhotoName);
             
             // Send array of comments
             await _networkCommunication.SendIntAsync(msg.Comments.Count);
@@ -33,7 +34,8 @@ namespace SocketLibrary.Messages.CommentList
         public async Task<CommentListResponse> ReceiveMessageAsync()
         {
             // All comments are from the same photo
-            var namephoto = await _networkCommunication.ReceiveStringAsync();
+            var username = await _networkCommunication.ReceiveStringAsync();
+            var photoName = await _networkCommunication.ReceiveStringAsync();
             
             // Receive array of comments
             var comments = new List<Comment>();
@@ -44,12 +46,13 @@ namespace SocketLibrary.Messages.CommentList
 
                 comments.Add(new Comment
                 {
-                    NamePhoto = namephoto,
+                    Username = username,
+                    PhotoName = photoName,
                     Text = text
                 });
             }
             
-            return new CommentListResponse(namephoto, comments);
+            return new CommentListResponse(username, photoName, comments);
         }
     }
 }

@@ -6,14 +6,14 @@ namespace Repositories.Dtos
     [Dapper.Contrib.Extensions.Table("Comments")]
     public class CommentDto
     {
-        [ExplicitKey] 
+        [Key] 
         private int Id { get; set;  }
         
-        [ForeignKey("Photo")]
-        public string NamePhoto { get; set; }
-
-        [ForeignKey("User")]
-        public string UserName { get; set; }
+        [ForeignKey("Photos")]
+        public string Username { get; set; }
+        
+        [ForeignKey("Photos")]
+        public string PhotoName { get; set; }
         public string Text { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace Services.Interfaces
     {
         Task<Photo> SavePhotoAsync(Photo photo);
         Task<IEnumerable<Photo>> GetPhotosFromUserAsync(string username);
-        Task<Photo> GetPhotoByNamePhotoAsync(string namePhoto);
+        Task<Photo> GetPhotoByPhotoNameAsync(string username, string photoName);
     }
 }

@@ -4,15 +4,21 @@ using SocketLibrary.Constants;
 
 namespace SocketLibrary.Messages.CommentList
 {
-    public class CommentListResponse: Response
+    public class CommentListResponse : Response
     {
-        public string Namephoto { get; }
+        public string Username { get; }
+        public string PhotoName { get; }
         public ICollection<Comment> Comments { get; }
-        
-        public CommentListResponse(string namephoto, ICollection<Comment> comments) : base(MessageId.CommentList)
+
+        public CommentListResponse(
+            string username,
+            string photoName,
+            ICollection<Comment> comments
+        ) : base(MessageId.CommentList)
         {
+            PhotoName = photoName;
             Comments = comments;
-            Namephoto = namephoto;
+            Username = username;
         }
     }
 }

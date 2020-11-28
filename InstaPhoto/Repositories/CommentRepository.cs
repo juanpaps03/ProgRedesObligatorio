@@ -11,12 +11,12 @@ namespace Repositories
     public class CommentRepository : ICommentRepository
     {
         private readonly IDbConnection _dbConnection;
-    
+
         public CommentRepository(IDbConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }
-    
+
         public async Task<IEnumerable<CommentDto>> GetCommentsAsync()
         {
             _dbConnection.Open();
@@ -24,13 +24,18 @@ namespace Repositories
             _dbConnection.Close();
             return comments;
         }
-    
-        public async Task<IEnumerable<CommentDto>> GetCommentByNamePhotoAsync(string namePhoto)
+
+        public async Task<IEnumerable<CommentDto>> GetCommentByNamePhotoAsync(string username, string photoName)
         {
             _dbConnection.Open();
             var commentDtoList = await _dbConnection.QueryAsync<CommentDto>(
-                sql: "SELECT * FROM Comment WHERE NamePhoto = @NamePhoto",
-                param: new {NamePhoto = namePhoto});
+                sql: "SELECT * FROM Comments WHERE Username = @Username AND PhotoName = @PhotoName",
+                param: new
+                {
+                    Username = username,
+                    PhotoName = photoName
+                }
+            );
             _dbConnection.Close();
             return commentDtoList;
         }
@@ -38,11 +43,14 @@ namespace Repositories
         public async Task<CommentDto> SaveCommentAsync(CommentDto commentDto)
         {
             _dbConnection.Open();
-            int namePhoto = await _dbConnection.InsertAsync(commentDto);
-            CommentDto responseCommentDto = await _dbConnection.GetAsync<CommentDto>(namePhoto);
+            var id = await _dbConnection.InsertAsync(commentDto);
+            // For some stupid reason the GetAsync does not work
+            var responseCommentDto = await _dbConnection.QuerySingleAsync<CommentDto>(
+                "SELECT * FROM Comments WHERE Id = @Id",
+                param: new {Id = id}
+            );
             _dbConnection.Close();
             return responseCommentDto;
         }
-
     }
 }

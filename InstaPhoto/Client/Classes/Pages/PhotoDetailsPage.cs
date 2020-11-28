@@ -43,7 +43,7 @@ namespace Client.Classes.Pages
                 options: new List<(string, string)>
                 {
                     (ShowCommentsAction, "Show comments"),
-                    (CommentAction, "Comments")
+                    (CommentAction, "Comment photo")
                 },
                 onSelect: OnMenuSelect,
                 onEscPressed: () => _navigation.Back(),

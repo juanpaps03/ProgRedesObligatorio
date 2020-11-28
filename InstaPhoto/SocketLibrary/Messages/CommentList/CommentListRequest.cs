@@ -4,11 +4,13 @@ namespace SocketLibrary.Messages.CommentList
 {
     public class CommentListRequest : Request
     {
-        public string Namephoto { get; }
-        
-        public CommentListRequest(string namephoto) : base(MessageId.CommentList)
+        public string Username { get; }
+        public string PhotoName { get; }
+
+        public CommentListRequest(string username, string photoName) : base(MessageId.CommentList)
         {
-            Namephoto = namephoto;
+            Username = username;
+            PhotoName = photoName;
         }
     }
 }
