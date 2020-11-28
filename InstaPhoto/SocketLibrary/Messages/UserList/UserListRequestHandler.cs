@@ -14,7 +14,7 @@ namespace SocketLibrary.Messages.UserList
 
         public async Task SendMessageAsync(UserListRequest msg)
         {
-            //await _networkCommunication.SendStringAsync();
+            await _networkCommunication.SendStringAsync("listUser");
         }
 
         public async Task<UserListRequest> ReceiveMessageAsync()
