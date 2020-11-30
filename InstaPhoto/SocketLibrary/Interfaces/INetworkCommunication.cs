@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace SocketLibrary
+namespace SocketLibrary.Interfaces
 {
     public interface INetworkCommunication
     {

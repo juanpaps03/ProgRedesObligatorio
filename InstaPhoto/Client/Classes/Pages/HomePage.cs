@@ -8,7 +8,7 @@ namespace Client.Classes.Pages
     public class HomePage : IPage
     {
         private const string UploadPhotoAction = "U";
-        private const string ListUsersAction = "L";
+        private const string UsersListAction = "L";
         private const string LogOutAction = "X";
 
         private readonly IPageNavigation _navigation;
@@ -21,7 +21,7 @@ namespace Client.Classes.Pages
                 options: new List<(string, string)>
                 {
                     (UploadPhotoAction, "Upload new photo"),
-                    (ListUsersAction, "Show users"),
+                    (UsersListAction, "Show users"),
                     (LogOutAction, "Logout"),
                 },
                 Navigate
@@ -34,6 +34,9 @@ namespace Client.Classes.Pages
             {
                 case UploadPhotoAction:
                     _navigation.GoToPage(IPageNavigation.UploadPhotoPage);
+                    break;
+                case UsersListAction:
+                    _navigation.GoToPage(IPageNavigation.UserListPage);
                     break;
                 default:
                     _navigation.Exit();
