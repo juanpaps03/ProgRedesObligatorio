@@ -37,6 +37,7 @@ namespace Server
         {
             _photoService = new PhotoServiceRemote(channel);
             _userService = new UserServiceRemote(channel);
+            // _commentService = new CommentServiceRemote(); // TODO: IMPLEMENT
 
             _protocolCommunication = new ProtocolCommunication(stream);
         }

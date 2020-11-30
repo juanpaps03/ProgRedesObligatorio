@@ -7,6 +7,7 @@ package photos;
 service Photos {
   rpc SavePhoto (SavePhotoRequest) returns (SavePhotoReply);
   rpc GetPhotosFromUser (GetPhotosFromUserRequest) returns (GetPhotosFromUserReply);
+  rpc GetPhotoByName (GetPhotoByNameRequest) returns (GetPhotoByNameReply);
 }
 
 // Photos
@@ -32,4 +33,14 @@ message GetPhotosFromUserRequest {
 
 message GetPhotosFromUserReply {
   repeated PhotoMessage PhotoList = 1;
+}
+
+// Get photo by name
+message GetPhotoByNameRequest {
+  string Username = 1;
+  string PhotoName = 2;
+}
+
+message GetPhotoByNameReply {
+  PhotoMessage Photo = 1;
 }

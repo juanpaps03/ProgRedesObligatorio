@@ -50,5 +50,17 @@ namespace GrpcServer.Services
                 PhotoList = {_mapper.Map<IEnumerable<PhotoMessage>>(photoList)}
             };
         }
+
+        public override async Task<GetPhotoByNameReply> GetPhotoByName(
+            GetPhotoByNameRequest request,
+            ServerCallContext context
+        )
+        {
+            var photo = await _photoService.GetPhotoByPhotoNameAsync(request.Username, request.PhotoName);
+            return new GetPhotoByNameReply
+            {
+                Photo = _mapper.Map<PhotoMessage>(photo)
+            };
+        }
     }
 }

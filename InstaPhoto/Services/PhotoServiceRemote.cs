@@ -42,5 +42,12 @@ namespace Services
             var reply = await _client.GetPhotosFromUserAsync(request);
             return _mapper.Map<IEnumerable<Photo>>(reply.PhotoList);
         }
+
+        public async Task<Photo> GetPhotoByPhotoNameAsync(string username, string photoName)
+        {
+            var request = new GetPhotoByNameRequest {Username = username, PhotoName = photoName};
+            var reply = await _client.GetPhotoByNameAsync(request);
+            return _mapper.Map<Photo>(reply.Photo);
+        }
     }
 }
