@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
+using SocketLibrary.Messages.CommentPhoto;
 using SocketLibrary.Messages.CreatePhoto;
 using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
+using SocketLibrary.Messages.CommentList;
 
 namespace SocketLibrary
 {
@@ -86,7 +88,7 @@ namespace SocketLibrary
                 
                 // User list
                 case UserListRequest userListRequest:
-                    var userListRequestHandler = new UserListRequestHandler(_networkCommunication);
+                    var userListRequestHandler = new UserListRequestHandler();
                     await userListRequestHandler.SendMessageAsync(userListRequest);
                     break;
                 case UserListResponse userListResponse:
@@ -96,6 +98,28 @@ namespace SocketLibrary
                     await userListResponseHandler.SendMessageAsync(userListResponse);
                     break;
                 
+                // Comment photo
+                case CommentPhotoRequest commentPhotoRequest:
+                    var commentPhotoRequestHandler = new CommentPhotoRequestHandler(_networkCommunication);
+                    await commentPhotoRequestHandler.SendMessageAsync(commentPhotoRequest);
+                    break;
+                case CommentPhotoResponse commentPhotoResponse:
+                    var commentPhotoResponseHandler = new CommentPhotoResponseHandler(
+                        _networkCommunication
+                    );
+                    await commentPhotoResponseHandler.SendMessageAsync(commentPhotoResponse);
+                    break;
+                // Comment List
+                case CommentListRequest commentListRequest:
+                    var commentListRequestHandler = new CommentListRequestHandler(_networkCommunication);
+                    await commentListRequestHandler.SendMessageAsync(commentListRequest);
+                    break;
+                case CommentListResponse commentListResponse:
+                    var commentListResponseHandler = new CommentListResponseHandler(
+                        _networkCommunication
+                    );
+                    await commentListResponseHandler.SendMessageAsync(commentListResponse);
+                    break;
                 default:
                     // TODO Create a custom exception
                     throw new Exception($"Message not recognized ID={msg.Id}, type={msg.Type}");
@@ -155,13 +179,32 @@ namespace SocketLibrary
                 
                 //User list
                 case (MessageId.UserList, MessageType.Request):
-                    var userListRequestHandler = new UserListRequestHandler(_networkCommunication);
+                    var userListRequestHandler = new UserListRequestHandler();
                     return await userListRequestHandler.ReceiveMessageAsync();
                 case (MessageId.UserList, MessageType.Response):
                     var userListResponseHandler = new UserListResponseHandler(
                         _networkCommunication
                     );
                     return await userListResponseHandler.ReceiveMessageAsync();
+                
+                //Comment Photo
+                case (MessageId.CommentPhoto, MessageType.Request):
+                    var commentPhotoRequestHandler = new CommentPhotoRequestHandler(_networkCommunication);
+                    return await commentPhotoRequestHandler.ReceiveMessageAsync();
+                case (MessageId.CommentPhoto, MessageType.Response):
+                    var commentPhotoResponseHandler = new CommentPhotoResponseHandler(
+                        _networkCommunication
+                    );
+                    return await commentPhotoResponseHandler.ReceiveMessageAsync();
+                //Comment List
+                case (MessageId.CommentList, MessageType.Request):
+                    var commentListRequestHandler = new CommentListRequestHandler(_networkCommunication);
+                    return await commentListRequestHandler.ReceiveMessageAsync();
+                case (MessageId.CommentList, MessageType.Response):
+                    var commentListResponseHandler = new CommentListResponseHandler(
+                        _networkCommunication
+                    );
+                    return await commentListResponseHandler.ReceiveMessageAsync();
             }
 
             // TODO Create a custom exception

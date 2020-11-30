@@ -6,6 +6,7 @@ namespace SocketLibrary.Constants
         UserAlreadyExists = 902,
         PhotoNameAlreadyExists = 903,
         UserNotFound = 904,
+        PhotoNotExist = 905,
 
         UnrecognizedCommand = 999
     }

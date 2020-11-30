@@ -52,5 +52,20 @@ namespace Repositories
 
             return photoDtoList;
         }
+
+        public async Task<PhotoDto> GetPhotoByPhotoNameAsync(string username, string photoName)
+        {
+            _dbConnection.Open();
+            var photoDto = await _dbConnection.QuerySingleAsync<PhotoDto>(
+                sql: "SELECT * FROM Photos WHERE Username = @Username AND Name = @PhotoName",
+                param: new
+                {
+                    Username = username,
+                    PhotoName = photoName
+                }
+            );
+            _dbConnection.Close();
+            return photoDto;
+        }
     }
 }
