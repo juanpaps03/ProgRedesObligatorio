@@ -1,13 +1,13 @@
 using System.Reflection.Metadata;
 using SocketLibrary.Constants;
 
-namespace SocketLibrary.Messages.Login
+namespace SocketLibrary.Messages.CreateUser
 {
-    public class LoginRequest: Request
+    public class CreateUserRequest: Request
     {
         public string UserName { get; set; }
         public string Password { get; set; }
-        public LoginRequest(string userName, string password) : base(MessageId.Login)
+        public CreateUserRequest(string userName, string password) : base(MessageId.CreateUser)
         {
             UserName = userName;
             Password = password;

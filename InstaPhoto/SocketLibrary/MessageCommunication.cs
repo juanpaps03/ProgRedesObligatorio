@@ -6,6 +6,7 @@ using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
 using SocketLibrary.Messages.CommentPhoto;
 using SocketLibrary.Messages.CreatePhoto;
+using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
@@ -43,6 +44,22 @@ namespace SocketLibrary
                     await loginRequestHandler.SendMessageAsync(loginRequest);
                     break;
                 
+                case LoginResponse loginResponse:
+                    var loginResponseHandler = new LoginResponseHandler(_networkCommunication);
+                    await loginResponseHandler.SendMessageAsync(loginResponse);
+                    break;
+                
+                // Create User
+                case CreateUserRequest createUserRequest:
+                    var createUserRequestHandler = new CreateUserRequestHandler(_networkCommunication);
+                    await createUserRequestHandler.SendMessageAsync(createUserRequest);
+                    break;
+                
+                case CreateUserResponse createUserResponse:
+                    var createUserResponseHandler = new CreateUserResponseHandler(_networkCommunication);
+                    await createUserResponseHandler.SendMessageAsync(createUserResponse);
+                    break;
+
                 // Create photo
                 case CreatePhotoRequest createPhotoRequest:
                     var createPhotoRequestHandler = new CreatePhotoRequestHandler(
@@ -125,6 +142,19 @@ namespace SocketLibrary
                     var loginRequestHandler = new LoginRequestHandler(_networkCommunication);
                     return await loginRequestHandler.ReceiveMessageAsync();
                 
+                case (MessageId.Login, MessageType.Response):
+                    var loginResponseHandler = new LoginResponseHandler(_networkCommunication);
+                    return await loginResponseHandler.ReceiveMessageAsync();
+                
+                // Create User
+                case (MessageId.CreateUser, MessageType.Request):
+                    var createUserRequestHandler = new CreateUserRequestHandler(_networkCommunication);
+                    return await createUserRequestHandler.ReceiveMessageAsync();
+                
+                case (MessageId.CreateUser, MessageType.Response):
+                    var createUserResponseHandler = new CreateUserResponseHandler(_networkCommunication);
+                    return await createUserResponseHandler.ReceiveMessageAsync();
+
                 // Create photo
                 case (MessageId.CreatePhoto, MessageType.Request):
                     var createPhotoRequestHandler = new CreatePhotoRequestHandler(
