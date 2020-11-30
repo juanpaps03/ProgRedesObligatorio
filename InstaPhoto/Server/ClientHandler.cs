@@ -13,13 +13,13 @@ using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
 using SocketLibrary.Messages.CommentList;
+using SocketLibrary.Messages.CommentPhoto;
 using SocketLibrary.Messages.CreatePhoto;
 using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
-using SocketLibrary.Messages.CommentPhoto;
 
 namespace Server
 {
@@ -125,7 +125,8 @@ namespace Server
 
             try
             {
-                await _userService.SaveUserAsync(user);
+                var createdUser = await _userService.SaveUserAsync(user);
+                _clientUsername = createdUser.Username;
                 return new CreateUserResponse();
             }
             catch(DatabaseSaveError)

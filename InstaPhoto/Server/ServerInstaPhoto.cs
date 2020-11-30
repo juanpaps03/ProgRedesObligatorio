@@ -12,7 +12,7 @@ namespace Server
         static void Main(string[] args)
         {
             const string connectionString =
-                @"Data Source=/home/juanpaps03/Documents/ORT/ProgramacionDeredes/ProgRedesObligatorio/dbInstaPhoto.db;foreign keys=true;Version=3;";
+                @"Data Source=/home/diego/ORT/ProgRedes/ProgRedesObligatorio/dbInstaPhoto.db;foreign keys=true;Version=3;";
             var connection = new SQLiteConnection(connectionString);
 
             var tcpListener = new TcpListener(new IPEndPoint(IPAddress.Parse("127.0.0.1"), ProtocolSpecification.Port));

@@ -35,8 +35,8 @@ namespace Repositories
         public async Task<UserDto> SaveUserAsync(UserDto userDto)
         {
             _dbConnection.Open();
-            int userName = await _dbConnection.InsertAsync(userDto);
-            UserDto responseUserDto = await _dbConnection.GetAsync<UserDto>(userName);
+            await _dbConnection.InsertAsync(userDto);
+            var responseUserDto = await _dbConnection.GetAsync<UserDto>(userDto.Username);
             _dbConnection.Close();
             return responseUserDto;
         }
