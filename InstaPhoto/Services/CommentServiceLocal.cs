@@ -8,11 +8,11 @@ using Services.Interfaces;
 
 namespace Services
 {
-    public class CommentService : ICommentService
+    public class CommentServiceLocal : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
 
-        public CommentService(ICommentRepository commentRepository)
+        public CommentServiceLocal(ICommentRepository commentRepository)
         {
             _commentRepository = commentRepository;
         }

@@ -34,10 +34,12 @@ namespace GrpcServer
             // Local repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
             
             // Local services
             services.AddScoped<IUserService, UserServiceLocal>();
             services.AddScoped<IPhotoService, PhotoServiceLocal>();
+            services.AddScoped<ICommentService, CommentServiceLocal>();
             
             // Add gRPC services
             services.AddGrpc();
@@ -57,6 +59,7 @@ namespace GrpcServer
             {
                 endpoints.MapGrpcService<UserGrpcService>();
                 endpoints.MapGrpcService<PhotoGrpcService>();
+                endpoints.MapGrpcService<CommentGrpcService>();
 
                 endpoints.MapGet("/",
                     async context =>
