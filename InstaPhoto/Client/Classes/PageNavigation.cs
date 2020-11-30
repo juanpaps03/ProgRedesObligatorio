@@ -24,10 +24,10 @@ namespace Client.Classes
                     _stack.Push(new LandingPage(this));
                     break;
                 case IPageNavigation.LoginPage:
-                    _stack.Push(new LoginPage(this));
+                    _stack.Push(new LoginPage(this, _protocolCommunication));
                     break;
                 case IPageNavigation.SignUpPage:
-                    _stack.Push(new SignUpPage(this));
+                    _stack.Push(new SignUpPage(this, _protocolCommunication));
                     break;
                 case IPageNavigation.HomePage:
                     _stack.Push(new HomePage(this));

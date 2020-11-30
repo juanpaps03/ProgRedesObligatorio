@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Client.Interfaces;
+using SocketLibrary.Interfaces;
+using SocketLibrary.Messages;
+using SocketLibrary.Messages.CreateUser;
+using SocketLibrary.Messages.Error;
+using SocketLibrary.Messages.Login;
 
 namespace Client.Classes.Pages
 {
@@ -20,10 +25,12 @@ namespace Client.Classes.Pages
         
         private readonly IPageNavigation _navigation;
         private readonly Menu _menu;
+        private readonly IProtocolCommunication _protocolCommunication;
 
-        public SignUpPage(IPageNavigation navigation)
+        public SignUpPage(IPageNavigation navigation, IProtocolCommunication protocolCommunication)
         {
             _navigation = navigation;
+            _protocolCommunication = protocolCommunication;
             _menu = new Menu(
                 options: new List<(string, string)>
                 {
@@ -53,7 +60,23 @@ namespace Client.Classes.Pages
             _password = ConsoleHelper.ReadLine();
 
             await DoSignUp();
-
+            
+            Response response = await _protocolCommunication.SendRequestAsync(
+                new CreateUserRequest(_username, _password)
+            );
+            switch (response)
+            {
+                case ErrorResponse errorResponse:
+                    ConsoleHelper.WriteLine(errorResponse.Message, ConsoleColor.Red);
+                    _validSignup = false;
+                    RenderRetry();
+                    break;
+                case CreateUserResponse createUserResponse:
+                    ConsoleHelper.WriteLine("Success SignUp!\n", ConsoleColor.Green);
+                    ConsoleHelper.WriteLine($"Welcome {_username}!\n");
+                    _validSignup = true;
+                    break;
+            }
             if (_validSignup)
                 _navigation.GoToPage(IPageNavigation.HomePage);
 

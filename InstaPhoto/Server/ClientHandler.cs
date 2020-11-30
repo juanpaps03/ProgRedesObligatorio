@@ -13,12 +13,13 @@ using SocketLibrary.Constants;
 using SocketLibrary.Interfaces;
 using SocketLibrary.Messages;
 using SocketLibrary.Messages.CommentList;
+using SocketLibrary.Messages.CommentPhoto;
 using SocketLibrary.Messages.CreatePhoto;
+using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
-using SocketLibrary.Messages.CommentPhoto;
 
 namespace Server
 {
@@ -46,12 +47,6 @@ namespace Server
 
         public async Task ExecuteAsync()
         {
-            // while (_clientUsername == null)
-            //     await _protocolCommunication.HandleRequestAsync(HandleLoginAsync);
-
-            // >>>>>>> Para testear la subida de fotos, comentar el login y descomentar la linea de abajo
-            _clientUsername = "admin";
-
             while (true) // TODO: CHANGE TO LOGOUT CONDITION
                 await _protocolCommunication.HandleRequestAsync(HandleRequestAsync);
         }
@@ -60,8 +55,10 @@ namespace Server
         {
             return request switch
             {
+                LoginRequest loginRequest => await HandleLoginAsync(loginRequest),
                 CreatePhotoRequest createPhotoRequest => await HandleCreatePhotoAsync(createPhotoRequest),
                 PhotoListRequest photoListRequest => await HandlePhotoListAsync(photoListRequest),
+                CreateUserRequest createUserRequest => await HandleCreateUserAsync(createUserRequest),
                 UserListRequest userListRequest => await HandleUserListAsync(),
                 CommentPhotoRequest commentPhotoRequest => await HandleCommentPhotoAsync(commentPhotoRequest),
                 CommentListRequest commentListRequest => await HandleCommentListAsync(commentListRequest),
@@ -117,11 +114,36 @@ namespace Server
                 return new ErrorResponse(ErrorId.PhotoNameAlreadyExists, e.Message);
             }
         }
-
-        private async Task<Response> HandleLoginAsync(Request request)
+        private async Task<Response> HandleCreateUserAsync(CreateUserRequest createUserRequest)
         {
-            // TODO: IMPLEMENT LOGIN
-            _clientUsername = "admin";
+            var user = new User()
+            {
+                Username = createUserRequest.UserName, 
+                Password = createUserRequest.Password,
+                Admin = false
+            };
+
+            try
+            {
+                var createdUser = await _userService.SaveUserAsync(user);
+                _clientUsername = createdUser.Username;
+                return new CreateUserResponse();
+            }
+            catch(DatabaseSaveError)
+            {
+                return new ErrorResponse(ErrorId.UserAlreadyExists, "User already exists");
+            }
+        }
+
+        private async Task<Response> HandleLoginAsync(LoginRequest request)
+        {
+            User user = await _userService.GetUserByUserNameAsync(request.UserName);
+            if (user is null)
+                return new ErrorResponse(ErrorId.InvalidCredentials, "Invalid Credentials");
+            if (request.Password != user.Password) 
+                return new ErrorResponse(ErrorId.InvalidCredentials, "Invalid Credentials");
+            
+            _clientUsername = user.Username;
             return new LoginResponse();
         }
 

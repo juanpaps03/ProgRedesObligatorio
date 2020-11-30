@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,9 +37,17 @@ namespace Services
 
         public async Task<User> SaveUserAsync(User user)
         {
-            UserDto userDto = MapUserDomainToDto(user);
-            var responseUserDto = await _userRepository.SaveUserAsync(userDto);
-            return MapUserDtoToDomain(responseUserDto);
+            try
+            {
+                UserDto userDto = MapUserDomainToDto(user);
+                var responseUserDto = await _userRepository.SaveUserAsync(userDto);
+                return MapUserDtoToDomain(responseUserDto);
+            }
+            catch
+            {
+                throw new DatabaseSaveError();
+            }
+            
         }
 
         private UserDto MapUserDomainToDto(User user)

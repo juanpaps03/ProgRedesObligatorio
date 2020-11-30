@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Client.Interfaces;
+using SocketLibrary.Interfaces;
+using SocketLibrary.Messages;
+using SocketLibrary.Messages.Error;
+using SocketLibrary.Messages.Login;
 
 namespace Client.Classes.Pages
 {
@@ -19,11 +23,14 @@ namespace Client.Classes.Pages
         private bool _validLogin;
 
         private readonly IPageNavigation _navigation;
+        private readonly IProtocolCommunication _protocolCommunication;
+        
         private readonly Menu _menu;
 
-        public LoginPage(IPageNavigation navigation)
+        public LoginPage(IPageNavigation navigation, IProtocolCommunication protocolCommunication)
         {
             _navigation = navigation;
+            _protocolCommunication = protocolCommunication;
             _menu = new Menu(
                 options: new List<(string, string)>
                 {
@@ -65,9 +72,22 @@ namespace Client.Classes.Pages
         {
             ConsoleHelper.WriteLine("\nLogging in...");
 
-            // TODO: CALL LOGIN
-            Thread.Sleep(500);
-            _validLogin = _username == "admin" && _password == "admin";
+            Response response = await _protocolCommunication.SendRequestAsync(
+                new LoginRequest(_username, _password)
+            );
+            switch (response)
+            {
+                case ErrorResponse errorResponse:
+                    ConsoleHelper.WriteLine(errorResponse.Message);
+                    _validLogin = false;
+                    RenderRetry();
+                    break;
+                case LoginResponse loginResponse:
+                    ConsoleHelper.WriteLine("Success Login!\n", ConsoleColor.Green);
+                    ConsoleHelper.WriteLine($"Welcome {_username}!\n");
+                    _validLogin = true;
+                    break;
+            }
         }
 
         private void RenderRetry()
@@ -75,7 +95,6 @@ namespace Client.Classes.Pages
             ConsoleHelper.WriteLine($"Username: {_username}");
             ConsoleHelper.WriteLine($"Password: {_password}");
 
-            ConsoleHelper.WriteLine("\nWrong username or password!\n", ConsoleColor.Red);
             _menu.Render();
         }
 
