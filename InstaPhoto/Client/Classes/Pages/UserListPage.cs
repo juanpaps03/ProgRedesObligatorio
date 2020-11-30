@@ -26,6 +26,11 @@ namespace Client.Classes.Pages
 
         public async Task RenderAsync()
         {
+            ConsoleHelper.WriteLine(
+                $"List of users\n",
+                ConsoleColor.Cyan
+            );
+            
             if (_userListMenu == null)
             {
                 await LoadPage();
@@ -54,12 +59,18 @@ namespace Client.Classes.Pages
                     var userList = new List<(string, string)>();
                     foreach (var user in userListResponse.Users)
                     {
-                        userList.Add((user.Username, ""));
+                        userList.Add((user.Username, user.Username));
                     }
-                    
+
                     _userListMenu = new Menu(
                         options: userList,
-                        onSelect: s => { }, // TODO: ADD NEW PAGE TO SEE COMMENTS AND ADD NEW
+                        onSelect: username =>
+                        {
+                            _navigation.GoToPage(
+                                IPageNavigation.PhotoListPage,
+                                new Dictionary<string, string> {{"username", username}}
+                            );
+                        },
                         onEscPressed: () => _navigation.Back(),
                         escapeActionName: "Go back"
                     );
