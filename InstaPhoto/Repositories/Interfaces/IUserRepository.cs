@@ -10,6 +10,7 @@ namespace Repositories.Interfaces
         Task<UserDto> GetUsersByUserNameAsync(string userName);
         Task<UserDto> SaveUserAsync(UserDto userDto);
         Task<UserDto> UpdateUserAsync(UserDto userDto);
+        Task DeleteUserAsync(UserDto userDto);
 
     }
 }

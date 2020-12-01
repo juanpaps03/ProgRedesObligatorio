@@ -58,6 +58,13 @@ namespace Repositories
                 _dbConnection.Close();
             }
         }
+        
+        public async Task DeleteUserAsync(UserDto userDto)
+        {
+            _dbConnection.Open();
+            await _dbConnection.DeleteAsync(userDto);
+            _dbConnection.Close();
+        }
 
     }
 }

@@ -30,5 +30,18 @@ namespace WebApi.Controllers
             var responseUser = await _userService.UpdateUserAsync(user);
             return Ok(responseUser);
         }
+        
+        [HttpDelete("{username}")]
+        public async Task<IActionResult> DeleteUserAsync(string userName)
+        {
+            var user = await _userService.GetUserByUserNameAsync(userName);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await _userService.DeleteUserAsync(user);
+            return NoContent();
+        }
     }
 }

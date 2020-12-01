@@ -62,6 +62,13 @@ namespace Services
                 throw new DatabaseSaveError();
             }
         }
+        
+        public async Task DeleteUserAsync(User user)
+        {
+            UserDto userDto = MapUserDomainToDto(user);
+            await _userRepository.DeleteUserAsync(userDto);
+        }
+        
         private UserDto MapUserDomainToDto(User user)
         {
             return new UserDto
