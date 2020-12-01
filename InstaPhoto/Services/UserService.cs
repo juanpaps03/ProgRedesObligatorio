@@ -47,9 +47,21 @@ namespace Services
             {
                 throw new DatabaseSaveError();
             }
-            
         }
 
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            try
+            {
+                UserDto userDto = MapUserDomainToDto(user);
+                var responseUserDto = await _userRepository.UpdateUserAsync(userDto);
+                return MapUserDtoToDomain(responseUserDto);
+            }
+            catch
+            {
+                throw new DatabaseSaveError();
+            }
+        }
         private UserDto MapUserDomainToDto(User user)
         {
             return new UserDto

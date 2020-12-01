@@ -9,5 +9,6 @@ namespace Services.Interfaces
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserByUserNameAsync(string userName);
         Task<User> SaveUserAsync(User user);
+        Task<User> UpdateUserAsync(User user);
     }
 }

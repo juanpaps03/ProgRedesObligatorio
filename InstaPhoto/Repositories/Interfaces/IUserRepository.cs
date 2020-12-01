@@ -9,6 +9,7 @@ namespace Repositories.Interfaces
         Task<IEnumerable<UserDto>> GetUsersAsync();
         Task<UserDto> GetUsersByUserNameAsync(string userName);
         Task<UserDto> SaveUserAsync(UserDto userDto);
+        Task<UserDto> UpdateUserAsync(UserDto userDto);
 
     }
 }

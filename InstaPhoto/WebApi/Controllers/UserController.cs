@@ -24,6 +24,11 @@ namespace WebApi.Controllers
             return new CreatedResult(string.Empty, responseUser);
         }
         
-        
+        [HttpPut]
+        public async Task<ActionResult<User>> UpdateUserAsync(User user)
+        {
+            var responseUser = await _userService.UpdateUserAsync(user);
+            return Ok(responseUser);
+        }
     }
 }

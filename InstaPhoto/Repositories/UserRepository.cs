@@ -41,5 +41,23 @@ namespace Repositories
             return responseUserDto;
         }
 
+        public async Task<UserDto> UpdateUserAsync(UserDto userDto)
+        {
+            _dbConnection.Open();
+            try
+            {
+                bool success = await _dbConnection.UpdateAsync(userDto);
+                if (success)
+                {
+                    return await _dbConnection.GetAsync<UserDto>(userDto.Username);
+                }
+                return null;
+            }
+            finally
+            {
+                _dbConnection.Close();
+            }
+        }
+
     }
 }
