@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Data.SQLite;
+using Grpc.Core;
+using Grpc.Net.Client;
 using Microsoft.AspNetCore.Http;
 using Services.Interfaces;
 using Services;
@@ -32,16 +34,13 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string instaPhotoConnString = Configuration.GetConnectionString("instaPhotoDB");
-            
             services.AddControllers();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
+            services.AddTransient<ChannelBase>(_ => GrpcChannel.ForAddress("https://localhost:5001"));
 
-            services.AddTransient<IDbConnection>(serviceProvider => new SQLiteConnection(instaPhotoConnString));
-
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserServiceRemote>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

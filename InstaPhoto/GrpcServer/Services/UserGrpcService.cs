@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Domain;
+using Domain.Responses;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using Services.Interfaces;
@@ -25,6 +26,7 @@ namespace GrpcServer.Services
                 {
                     cfg.CreateMap<UserMessage, User>();
                     cfg.CreateMap<User, UserMessage>();
+                    cfg.CreateMap<PaginatedResponse<User>, GetPaginatedUsersReply>();
                 });
             _mapper = config.CreateMapper();
         }
@@ -56,6 +58,32 @@ namespace GrpcServer.Services
             {
                 User = _mapper.Map<UserMessage>(responseUser)
             };
+        }
+
+        public override async Task<GetPaginatedUsersReply> GetPaginatedUsers(
+            GetPaginatedUsersRequest request, 
+            ServerCallContext context
+        )
+        {
+            var response = await _userService.GetUsersAsync(request.Page, request.PageSize);
+            return _mapper.Map<GetPaginatedUsersReply>(response);
+        }
+
+        public override async Task<UpdateUserReply> UpdateUser(UpdateUserRequest request, ServerCallContext context)
+        {
+            var user = _mapper.Map<User>(request.User);
+            var responseUser = await _userService.UpdateUserAsync(user);
+            return new UpdateUserReply
+            {
+                User = _mapper.Map<UserMessage>(responseUser)
+            };
+        }
+
+        public override async Task<DeleteUserReply> DeleteUser(DeleteUserRequest request, ServerCallContext context)
+        {
+            var user = _mapper.Map<User>(request.User);
+            await _userService.DeleteUserAsync(user);
+            return new DeleteUserReply();
         }
     }
 }

@@ -8,6 +8,9 @@ service Users {
   rpc GetUsers (GetUsersRequest) returns (GetUsersReply);
   rpc GetUserByUserName (GetUserByUserNameRequest) returns (GetUserByUserNameReply);
   rpc SaveUser (SaveUserRequest) returns (SaveUserReply);
+  rpc GetPaginatedUsers (GetPaginatedUsersRequest) returns (GetPaginatedUsersReply);
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
 }
 
 // User
@@ -42,3 +45,30 @@ message SaveUserReply {
   UserMessage user = 1;
 }
 
+// Get paginated users
+message GetPaginatedUsersRequest {
+  int32 page = 1;
+  int32 pageSize = 2;
+}
+
+message GetPaginatedUsersReply {
+  int32 TotalElements = 1;
+  int32 TotalPages = 2;
+  repeated UserMessage Elements = 3;
+}
+
+// Update user
+message UpdateUserRequest {
+  UserMessage User = 1;
+}
+
+message UpdateUserReply {
+  UserMessage User = 1;
+}
+
+// Delete user
+message DeleteUserRequest {
+  UserMessage User = 1;
+}
+
+message DeleteUserReply {}
