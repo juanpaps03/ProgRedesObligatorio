@@ -19,6 +19,7 @@ using SocketLibrary.Messages.CreatePhoto;
 using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
+using SocketLibrary.Messages.Logout;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
 
@@ -26,7 +27,9 @@ namespace Server
 {
     public class ClientHandler
     {
+        private readonly NetworkStream _networkStream;
         private string _clientUsername;
+        private bool _exit;
 
         private readonly IProtocolCommunication _protocolCommunication;
 
@@ -41,12 +44,27 @@ namespace Server
             _commentService = new CommentServiceRemote(channel);
 
             _protocolCommunication = new ProtocolCommunication(stream);
+            _networkStream = stream;
+        }
+
+        ~ClientHandler()
+        {
+            _networkStream.Dispose();
         }
 
         public async Task ExecuteAsync()
         {
-            while (true) // TODO: CHANGE TO LOGOUT CONDITION
-                await _protocolCommunication.HandleRequestAsync(HandleRequestAsync);
+            while (!_exit)
+            {
+                try
+                {
+                    await _protocolCommunication.HandleRequestAsync(HandleRequestAsync);
+                }
+                catch (ConnectionLost)
+                {
+                    _exit = true;
+                }
+            }
         }
 
         private async Task<Response> HandleRequestAsync(Request request)
@@ -57,11 +75,18 @@ namespace Server
                 CreatePhotoRequest createPhotoRequest => await HandleCreatePhotoAsync(createPhotoRequest),
                 PhotoListRequest photoListRequest => await HandlePhotoListAsync(photoListRequest),
                 CreateUserRequest createUserRequest => await HandleCreateUserAsync(createUserRequest),
-                UserListRequest userListRequest => await HandleUserListAsync(),
+                UserListRequest _ => await HandleUserListAsync(),
                 CommentPhotoRequest commentPhotoRequest => await HandleCommentPhotoAsync(commentPhotoRequest),
                 CommentListRequest commentListRequest => await HandleCommentListAsync(commentListRequest),
+                LogoutRequest _ => await HandleLogoutAsync(),
                 _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
             };
+        }
+
+        private async Task<Response> HandleLogoutAsync()
+        {
+            _exit = true;
+            return new LogoutResponse();
         }
 
         private async Task<Response> HandleUserListAsync()

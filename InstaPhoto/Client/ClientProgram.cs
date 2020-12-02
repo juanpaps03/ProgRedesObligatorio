@@ -6,6 +6,7 @@ using Client.Classes;
 using Client.Interfaces;
 using SocketLibrary;
 using SocketLibrary.Constants;
+using SocketLibrary.Messages.Logout;
 
 namespace Client
 {
@@ -31,6 +32,8 @@ namespace Client
                 ConsoleHelper.Clear();
                 await navigation.Top().RenderAsync();
             }
+
+            await protocolCommunication.SendRequestAsync(new LogoutRequest());
         }
     }
 }
