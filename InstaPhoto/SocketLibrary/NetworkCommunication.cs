@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Exceptions;
 using SocketLibrary.Interfaces;
 
 namespace SocketLibrary
@@ -36,7 +37,7 @@ namespace SocketLibrary
                     length - offset
                 );
                 if (received == 0)
-                    throw new Exception("Connection lost");
+                    throw new ConnectionLost();
                 offset += received;
             }
 
