@@ -9,6 +9,7 @@ namespace SocketLibrary.Constants
         UserList = 104,
         CommentList = 106,
         CommentPhoto = 107,
+        Logout = 108,
         Error = 900
     }
 }

@@ -6,19 +6,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LoggerLibrary\LoggerLibrary.csproj" />
-      <ProjectReference Include="..\Services\Services.csproj" />
-      <ProjectReference Include="..\SocketLibrary\SocketLibrary.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Google.Protobuf" Version="3.14.0" />
       <PackageReference Include="Grpc.Net.Client" Version="2.33.1" />
       <PackageReference Include="Grpc.Tools" Version="2.33.1">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.113.1" />
+      <PackageReference Include="System.Data.SQLite" Version="1.0.113.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Repositories\Repositories.csproj" />
+      <ProjectReference Include="..\Services\Services.csproj" />
     </ItemGroup>
 
 </Project>

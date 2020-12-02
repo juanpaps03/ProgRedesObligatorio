@@ -1,36 +1,55 @@
 ﻿using System;
-using System.Data.SQLite;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Grpc.Net.Client;
 using SocketLibrary.Constants;
 
 namespace Server
 {
     class ServerInstaPhoto
     {
-        static void Main(string[] args)
-        {
-            const string connectionString =
-                @"Data Source=/home/diego/ORT/ProgRedes/ProgRedesObligatorio/dbInstaPhoto.db;foreign keys=true;Version=3;";
-            var connection = new SQLiteConnection(connectionString);
+        private static bool _exit;
 
-            var tcpListener = new TcpListener(new IPEndPoint(IPAddress.Parse("127.0.0.1"), ProtocolSpecification.Port));
+        static async Task Main(string[] args)
+        {
+            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var tcpListener = new TcpListener(
+                new IPEndPoint(
+                    IPAddress.Parse("127.0.0.1"),
+                    ProtocolSpecification.Port
+                )
+            );
             tcpListener.Start(20);
-            while (true) // TODO: CHANGE FOR REAL CONDITION
+            
+            AcceptClientsAsync(tcpListener, channel);
+
+            while (!_exit)
             {
-                var tcpClient = tcpListener.AcceptTcpClient();
+                Console.Clear();
+                Console.Write("Write \"exit\" to close the server: ");
+                var command = Console.ReadLine();
+
+                _exit = command != null && command == "exit";
+            }
+
+            tcpListener.Stop();
+        }
+
+        private static async Task AcceptClientsAsync(TcpListener tcpListener, GrpcChannel channel)
+        {
+            while (!_exit)
+            {
+                var tcpClient = await tcpListener.AcceptTcpClientAsync();
                 var clientHandler = new ClientHandler(
                     stream: tcpClient.GetStream(),
-                    connection
+                    channel
                 );
                 clientHandler.ExecuteAsync().ContinueWith(
                     t => Console.WriteLine(t.Exception),
                     TaskContinuationOptions.OnlyOnFaulted
                 );
             }
-
-            tcpListener.Stop();
         }
     }
 }

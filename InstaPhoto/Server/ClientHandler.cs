@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Domain;
 using Exceptions;
 using LoggerLibrary;
+using Grpc.Core;
 using Repositories;
 using Services;
 using Services.Interfaces;
@@ -19,6 +20,7 @@ using SocketLibrary.Messages.CreatePhoto;
 using SocketLibrary.Messages.CreateUser;
 using SocketLibrary.Messages.Error;
 using SocketLibrary.Messages.Login;
+using SocketLibrary.Messages.Logout;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
 
@@ -26,7 +28,9 @@ namespace Server
 {
     public class ClientHandler
     {
+        private readonly NetworkStream _networkStream;
         private string _clientUsername;
+        private bool _exit;
 
         private readonly IProtocolCommunication _protocolCommunication;
 
@@ -35,22 +39,34 @@ namespace Server
         private readonly ICommentService _commentService;
         private readonly ILogger logger = new FileLogger();
 
-        public ClientHandler(NetworkStream stream, IDbConnection dbConnection)
+        public ClientHandler(NetworkStream stream, ChannelBase channel)
         {
-            var photoRepository = new PhotoRepository(dbConnection);
-            _photoService = new PhotoService(photoRepository);
-            var userRepository = new UserRepository(dbConnection);
-            _userService = new UserService(userRepository);
-            var commentRepository = new CommentRepository(dbConnection);
-            _commentService = new CommentService(commentRepository);
+            _photoService = new PhotoServiceRemote(channel);
+            _userService = new UserServiceRemote(channel);
+            _commentService = new CommentServiceRemote(channel);
 
             _protocolCommunication = new ProtocolCommunication(stream);
+            _networkStream = stream;
+        }
+
+        ~ClientHandler()
+        {
+            _networkStream.Dispose();
         }
 
         public async Task ExecuteAsync()
         {
-            while (true) // TODO: CHANGE TO LOGOUT CONDITION
-                await _protocolCommunication.HandleRequestAsync(HandleRequestAsync);
+            while (!_exit)
+            {
+                try
+                {
+                    await _protocolCommunication.HandleRequestAsync(HandleRequestAsync);
+                }
+                catch (ConnectionLost)
+                {
+                    _exit = true;
+                }
+            }
         }
 
         private async Task<Response> HandleRequestAsync(Request request)
@@ -61,11 +77,18 @@ namespace Server
                 CreatePhotoRequest createPhotoRequest => await HandleCreatePhotoAsync(createPhotoRequest),
                 PhotoListRequest photoListRequest => await HandlePhotoListAsync(photoListRequest),
                 CreateUserRequest createUserRequest => await HandleCreateUserAsync(createUserRequest),
-                UserListRequest userListRequest => await HandleUserListAsync(),
+                UserListRequest _ => await HandleUserListAsync(),
                 CommentPhotoRequest commentPhotoRequest => await HandleCommentPhotoAsync(commentPhotoRequest),
                 CommentListRequest commentListRequest => await HandleCommentListAsync(commentListRequest),
+                LogoutRequest _ => await HandleLogoutAsync(),
                 _ => new ErrorResponse(ErrorId.UnrecognizedCommand, $"Unrecognized command Id={request.Id}")
             };
+        }
+
+        private async Task<Response> HandleLogoutAsync()
+        {
+            _exit = true;
+            return new LogoutResponse();
         }
 
         private async Task<Response> HandleUserListAsync()
