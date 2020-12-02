@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Data.SQLite;
+using Microsoft.AspNetCore.Http;
 using Services.Interfaces;
 using Services;
 using Repositories.Interfaces;
@@ -34,6 +35,8 @@ namespace WebApi
             string instaPhotoConnString = Configuration.GetConnectionString("instaPhotoDB");
             
             services.AddControllers();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient<IDbConnection>(serviceProvider => new SQLiteConnection(instaPhotoConnString));
 
