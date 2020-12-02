@@ -52,6 +52,11 @@ namespace Server
             _networkStream.Dispose();
         }
 
+        public string GetClientName()
+        {
+            return _clientUsername ?? "<Anonymous>";
+        } 
+
         public async Task ExecuteAsync()
         {
             while (!_exit)
@@ -137,6 +142,7 @@ namespace Server
                 return new ErrorResponse(ErrorId.PhotoNameAlreadyExists, e.Message);
             }
         }
+        
         private async Task<Response> HandleCreateUserAsync(CreateUserRequest createUserRequest)
         {
             var user = new User()
