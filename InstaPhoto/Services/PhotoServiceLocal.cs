@@ -9,12 +9,12 @@ using Services.Interfaces;
 
 namespace Services
 {
-    public class PhotoService : IPhotoService
+    public class PhotoServiceLocal : IPhotoService
     {
         private readonly IPhotoRepository _photoRepository;
         private readonly IMapper _mapper;
 
-        public PhotoService(IPhotoRepository photoRepository)
+        public PhotoServiceLocal(IPhotoRepository photoRepository)
         {
             _photoRepository = photoRepository;
             

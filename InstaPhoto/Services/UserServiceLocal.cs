@@ -11,11 +11,11 @@ using Domain.Responses;
 
 namespace Services
 {
-    public class UserService : IUserService
+    public class UserServiceLocal : IUserService
     {
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserServiceLocal(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
