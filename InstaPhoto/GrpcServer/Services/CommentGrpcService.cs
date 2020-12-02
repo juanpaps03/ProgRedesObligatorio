@@ -25,7 +25,8 @@ namespace GrpcServer.Services
                 {
                     cfg.CreateMap<CommentMessage, Comment>();
                     cfg.CreateMap<Comment, CommentMessage>();
-                });
+                }
+            );
             _mapper = config.CreateMapper();
         }
 
@@ -39,7 +40,9 @@ namespace GrpcServer.Services
         }
 
         public override async Task<GetCommentsByPhotoNameReply> GetCommentsByPhotoName(
-            GetCommentsByPhotoNameRequest request, ServerCallContext context)
+            GetCommentsByPhotoNameRequest request,
+            ServerCallContext context
+        )
         {
             var commentList = await _commentService.GetCommentsByNamePhotoAsync(
                 request.Username,
