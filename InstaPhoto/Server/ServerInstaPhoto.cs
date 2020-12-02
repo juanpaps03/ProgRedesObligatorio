@@ -19,7 +19,6 @@ namespace Server
             tcpListener.Start(20);
             while (true) // TODO: CHANGE FOR REAL CONDITION
             {
-                Console.WriteLine("when is this being executed?");
                 var tcpClient = tcpListener.AcceptTcpClient();
                 var clientHandler = new ClientHandler(
                     stream: tcpClient.GetStream(),
