@@ -12,6 +12,7 @@ using SocketLibrary.Messages.Login;
 using SocketLibrary.Messages.PhotoList;
 using SocketLibrary.Messages.UserList;
 using SocketLibrary.Messages.CommentList;
+using SocketLibrary.Messages.Logout;
 
 namespace SocketLibrary
 {
@@ -109,6 +110,7 @@ namespace SocketLibrary
                     );
                     await commentPhotoResponseHandler.SendMessageAsync(commentPhotoResponse);
                     break;
+                
                 // Comment List
                 case CommentListRequest commentListRequest:
                     var commentListRequestHandler = new CommentListRequestHandler(_networkCommunication);
@@ -120,6 +122,17 @@ namespace SocketLibrary
                     );
                     await commentListResponseHandler.SendMessageAsync(commentListResponse);
                     break;
+                
+                // Logout
+                case LogoutRequest logoutRequest:
+                    var logoutRequestHandler = new LogoutRequestHandler();
+                    await logoutRequestHandler.SendMessageAsync(logoutRequest);
+                    break;
+                case LogoutResponse logoutResponse:
+                    var logoutResponseHandler = new LogoutResponseHandler();
+                    await logoutResponseHandler.SendMessageAsync(logoutResponse);
+                    break;
+                
                 default:
                     // TODO Create a custom exception
                     throw new Exception($"Message not recognized ID={msg.Id}, type={msg.Type}");
@@ -196,6 +209,7 @@ namespace SocketLibrary
                         _networkCommunication
                     );
                     return await commentPhotoResponseHandler.ReceiveMessageAsync();
+                
                 //Comment List
                 case (MessageId.CommentList, MessageType.Request):
                     var commentListRequestHandler = new CommentListRequestHandler(_networkCommunication);
@@ -205,6 +219,14 @@ namespace SocketLibrary
                         _networkCommunication
                     );
                     return await commentListResponseHandler.ReceiveMessageAsync();
+                
+                // Logout
+                case (MessageId.Logout, MessageType.Request):
+                    var logoutRequestHandler = new LogoutRequestHandler();
+                    return await logoutRequestHandler.ReceiveMessageAsync();
+                case (MessageId.Logout, MessageType.Response):
+                    var logoutResponseHandler = new LogoutResponseHandler();
+                    return await logoutResponseHandler.ReceiveMessageAsync();
             }
 
             // TODO Create a custom exception
