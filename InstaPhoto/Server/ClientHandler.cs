@@ -27,7 +27,7 @@ namespace Server
 {
     public class ClientHandler
     {
-        public Guid Id;
+        public Guid Id = Guid.NewGuid();
 
         private readonly NetworkStream _networkStream;
         private string _clientUsername;

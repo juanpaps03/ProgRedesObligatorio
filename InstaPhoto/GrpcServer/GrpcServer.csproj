@@ -6,6 +6,7 @@
 
     <ItemGroup>
         <Protobuf Include="Protos\comments.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\logs.proto" GrpcServices="Server" />
         <Protobuf Include="Protos\users.proto" GrpcServices="Server" />
         <Protobuf Include="Protos\photos.proto" GrpcServices="Server" />
     </ItemGroup>

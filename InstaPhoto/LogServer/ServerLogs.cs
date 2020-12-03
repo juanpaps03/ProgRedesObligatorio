@@ -1,33 +1,46 @@
 ﻿using System;
+using System.Data.SQLite;
+using System.Threading.Tasks;
 using AppSettings;
+using Domain;
+using Grpc.Net.Client;
 using LoggerLibrary;
 using LoggerLibrary.Rabbit;
 using Microsoft.Extensions.Configuration;
+using Services;
 
 namespace LogServer
 {
     class ServerLogs
     {
+        private static LogServiceRemote _logServiceRemote;
         static void Main(string[] args)
         {
             IConfiguration configuration = AppSettingsFactory.GetAppSettings();
-
+            
+            var channel = GrpcChannel.ForAddress(configuration["GrpcServer"]);
+            _logServiceRemote = new LogServiceRemote(channel);
+            
+            // Rabbit connection init
+            string rabbitHost = configuration["RabbitHost"];
             using var rabbitClient = new RabbitQueueHelper(
-                rabbitHostname: configuration["RabbitHost"],
+                rabbitHostname: rabbitHost,
                 queueName: configuration["LogQueueName"]
             );
             rabbitClient.QueueDeclare();
-            rabbitClient.ReceiveMessages(LogFileHandler);
+            rabbitClient.ReceiveMessages(LogRemoteHandler);
 
             Console.WriteLine($"Listening queue: {configuration["LogQueueName"]}");
             Console.Read();
         }
 
-        private static void LogFileHandler(string message)
+        public static async Task LogRemoteHandler(string message)
         {
-            Console.WriteLine($"Saving log message: {message}");
-            ILogger logger = new FileLogger();
-            logger.SaveLog(message);
+            await _logServiceRemote.SaveLogAsync(new Log
+            {
+               date = DateTime.Now,
+               Message = message
+            });
         }
     }
 }
