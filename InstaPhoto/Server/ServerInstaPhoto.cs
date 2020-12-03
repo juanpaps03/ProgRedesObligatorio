@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using AppSettings;
 using Grpc.Net.Client;
+using Microsoft.Extensions.Configuration;
 using SocketLibrary.Constants;
 
 namespace Server
@@ -18,7 +20,9 @@ namespace Server
 
         static async Task Main(string[] args)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            IConfiguration configuration = AppSettingsFactory.GetAppSettings();
+            
+            using var channel = GrpcChannel.ForAddress(configuration["GrpcServer"]);
             var tcpListener = new TcpListener(
                 new IPEndPoint(
                     IPAddress.Parse("127.0.0.1"),

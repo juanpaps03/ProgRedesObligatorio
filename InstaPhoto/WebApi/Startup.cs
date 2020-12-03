@@ -1,24 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using Grpc.Core;
+using Grpc.Net.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.Data.SQLite;
-using Grpc.Core;
-using Grpc.Net.Client;
-using Microsoft.AspNetCore.Http;
-using Services.Interfaces;
 using Services;
-using Repositories.Interfaces;
-using Repositories;
+using Services.Interfaces;
 
 namespace WebApi
 {
