@@ -97,7 +97,7 @@ namespace Server
                     channel,
                     _logger
                 );
-                var id = await AddClientAsync(clientHandler);
+                await AddClientAsync(clientHandler);
 
                 Task.Run(async () =>
                 {
@@ -111,36 +111,31 @@ namespace Server
                     }
                     finally
                     {
-                        await RemoveClientAsync(id);
+                        await RemoveClientAsync(clientHandler.Id);
                     }
                 });
             }
         }
 
-        private static Task<Guid> AddClientAsync(ClientHandler clientHandler)
+        private static async Task AddClientAsync(ClientHandler clientHandler)
         {
-            var id = Guid.NewGuid();
             lock (ClientsLock)
             {
-                while (Clients.ContainsKey(id))
-                    id = Guid.NewGuid();
-                Clients[id] = (DateTime.Now, clientHandler);
+                while (Clients.ContainsKey(clientHandler.Id))
+                    clientHandler.Id = Guid.NewGuid();
+                Clients[clientHandler.Id] = (DateTime.Now, clientHandler);
             }
-
-            return Task.FromResult(id);
         }
 
-        private static Task RemoveClientAsync(Guid id)
+        private async static Task RemoveClientAsync(Guid id)
         {
             lock (ClientsLock)
             {
                 Clients.Remove(id);
             }
-
-            return Task.FromResult(0);
         }
 
-        private static Task<List<(Guid, DateTime, string)>> GetClientNamesAsync()
+        private async static Task<List<(Guid, DateTime, string)>> GetClientNamesAsync()
         {
             var clientNames = new List<(Guid, DateTime, string)>();
             lock (ClientsLock)
@@ -153,7 +148,7 @@ namespace Server
                 }
             }
 
-            return Task.FromResult(clientNames);
+            return clientNames;
         }
     }
 }
