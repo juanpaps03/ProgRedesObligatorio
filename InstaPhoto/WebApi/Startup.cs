@@ -28,7 +28,11 @@ namespace WebApi
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
-            services.AddTransient<ChannelBase>(_ => GrpcChannel.ForAddress("https://localhost:5001"));
+            services.AddTransient<ChannelBase>(_ =>
+            {
+                var grpcServerAddress = Configuration.GetSection("AppSettings")["GrpcServer"];
+                return GrpcChannel.ForAddress(grpcServerAddress);
+            });
 
             services.AddScoped<IUserService, UserServiceRemote>();
             services.AddScoped<ILogService, LogServiceRemote>();

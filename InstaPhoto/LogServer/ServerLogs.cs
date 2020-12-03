@@ -18,7 +18,7 @@ namespace LogServer
         {
             IConfiguration configuration = AppSettingsFactory.GetAppSettings();
             
-            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var channel = GrpcChannel.ForAddress(configuration["GrpcServer"]);
             _logServiceRemote = new LogServiceRemote(channel);
             
             // Rabbit connection init
@@ -36,7 +36,7 @@ namespace LogServer
 
         public static async Task LogRemoteHandler(string message)
         {
-            await _logServiceRemote.SaveLogAsync(new Log()
+            await _logServiceRemote.SaveLogAsync(new Log
             {
                date = DateTime.Now,
                Message = message

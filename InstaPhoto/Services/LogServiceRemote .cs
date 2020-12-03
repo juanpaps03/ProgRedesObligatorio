@@ -46,7 +46,7 @@ namespace Services
         {
             var logMessage = _mapper.Map<LogMessage>(log);
             var reply = await _client.SaveLogAsync(
-                new SaveLogsRequest()
+                new SaveLogsRequest
                 {
                     Log = logMessage
                 }
