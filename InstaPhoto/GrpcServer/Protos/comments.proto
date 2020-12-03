@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package comments;
+
+service Comments {
+  rpc GetComments (GetCommentsRequest) returns (GetCommentsReply);
+  rpc GetCommentsByPhotoName (GetCommentsByPhotoNameRequest) returns (GetCommentsByPhotoNameReply);
+  rpc SaveComment (SaveCommentRequest) returns (SaveCommentReply);
+}
+
+message CommentMessage {
+  string PhotoName = 1;
+  string Username = 2;
+  string Text = 3;
+}
+
+// Get comments
+message GetCommentsRequest {}
+
+message GetCommentsReply {
+  repeated CommentMessage CommentList = 1;
+}
+
+// Get comments by photo name
+message GetCommentsByPhotoNameRequest {
+  string Username = 1;
+  string PhotoName = 2;
+}
+
+message GetCommentsByPhotoNameReply {
+  repeated CommentMessage CommentList = 1;
+}
+
+// Save comment
+message SaveCommentRequest {
+  CommentMessage Comment = 1;
+}
+
+message SaveCommentReply {
+  CommentMessage Comment = 1;
+}

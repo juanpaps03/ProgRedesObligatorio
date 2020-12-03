@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package logs;
+
+service Logs {
+  rpc GetLogs (GetLogsRequest) returns (GetLogsReply);
+  rpc GetPaginatedLogs (GetPaginatedLogsRequest) returns (GetPaginatedLogsReply);
+  rpc SaveLog (SaveLogsRequest) returns (SaveLogsReply);
+}
+
+// Logs
+message LogMessage {
+  string Message = 1;
+  int32 ID = 2;
+  int64 Date = 3;
+}
+
+// Get logs
+message GetLogsRequest {}
+message SaveLogsRequest {
+  LogMessage Log = 1;
+}
+
+message GetLogsReply {
+  repeated LogMessage LogList = 1;
+}
+message SaveLogsReply {
+  LogMessage Log = 1;
+}
+// Get paginated logs
+message GetPaginatedLogsRequest {
+  int32 page = 1;
+  int32 pageSize = 2;
+}
+
+message GetPaginatedLogsReply {
+  int32 TotalElements = 1;
+  int32 TotalPages = 2;
+  repeated LogMessage Elements = 3;
+}
+
