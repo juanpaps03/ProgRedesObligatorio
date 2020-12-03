@@ -51,7 +51,7 @@ namespace Services
                 return PaginationHelper<User>.GeneratePaginatedResponse(pageSize, totalUsers, users);
             }
 
-            return null;
+            return PaginationHelper<User>.GeneratePaginatedResponse(pageSize, totalUsers, new List<User>());
         }
 
         public async Task<User> GetUserByUserNameAsync(string userName)

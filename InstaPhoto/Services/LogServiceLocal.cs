@@ -66,7 +66,7 @@ namespace Services
                 return PaginationHelper<Log>.GeneratePaginatedResponse(pageSize, totalLogs, logs);
             }
 
-            return null;
+            return PaginationHelper<Log>.GeneratePaginatedResponse(pageSize, totalLogs, new List<Log>());
         }
 
         private Log MapLogDtoToDomain(LogDto logDto)
