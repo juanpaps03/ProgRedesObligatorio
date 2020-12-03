@@ -12,8 +12,9 @@ namespace Server
     {
         private static bool _exit;
 
-        private static object _clientsLock = new object();
-        private static Dictionary<Guid, ClientHandler> _clients = new Dictionary<Guid, ClientHandler>();
+        private static readonly object ClientsLock = new object();
+        private static readonly Dictionary<Guid, (DateTime, ClientHandler)> Clients =
+            new Dictionary<Guid, (DateTime, ClientHandler)>();
 
         static async Task Main(string[] args)
         {
@@ -43,15 +44,16 @@ namespace Server
                         break;
                     case "show users":
                         var userList = await GetClientNamesAsync();
-                        foreach (var (id, name) in userList)
+                        foreach (var (id, connectionTime, name) in userList)
                         {
-                            Console.WriteLine($"\t{id.ToString()} - {name}");
+                            Console.WriteLine($"\t{connectionTime} - {name} ({id.ToString()})");
                         }
 
                         if (userList.Count == 0)
                         {
                             Console.WriteLine("\tNo users connected");
                         }
+
                         break;
                     case "exit":
                         _exit = true;
@@ -100,11 +102,11 @@ namespace Server
         private static Task<Guid> AddClientAsync(ClientHandler clientHandler)
         {
             var id = Guid.NewGuid();
-            lock (_clientsLock)
+            lock (ClientsLock)
             {
-                while (_clients.ContainsKey(id))
+                while (Clients.ContainsKey(id))
                     id = Guid.NewGuid();
-                _clients[id] = clientHandler;
+                Clients[id] = (DateTime.Now, clientHandler);
             }
 
             return Task.FromResult(id);
@@ -112,25 +114,27 @@ namespace Server
 
         private static Task RemoveClientAsync(Guid id)
         {
-            lock (_clientsLock)
+            lock (ClientsLock)
             {
-                _clients.Remove(id);
+                Clients.Remove(id);
             }
 
             return Task.FromResult(0);
         }
 
-        private static Task<Dictionary<Guid, string>> GetClientNamesAsync()
+        private static Task<List<(Guid, DateTime, string)>> GetClientNamesAsync()
         {
-            var clientNames = new Dictionary<Guid, string>();
-            lock (_clientsLock)
+            var clientNames = new List<(Guid, DateTime, string)>();
+            lock (ClientsLock)
             {
-                foreach (var (id, clientHandler) in _clients)
+                foreach (var (id, (connectionTime, clientHandler)) in Clients)
                 {
-                    clientNames[id] = clientHandler.GetClientName();
+                    clientNames.Add(
+                        (id, connectionTime, clientHandler.GetClientName())
+                    );
                 }
             }
-            
+
             return Task.FromResult(clientNames);
         }
     }
