@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Domain;
 using Exceptions;
-using LoggerLibrary;
 using Grpc.Core;
-using Repositories;
+using LoggerLibrary;
 using Services;
 using Services.Interfaces;
 using SocketLibrary;
@@ -37,9 +35,9 @@ namespace Server
         private readonly IPhotoService _photoService;
         private readonly IUserService _userService;
         private readonly ICommentService _commentService;
-        private readonly ILogger logger = new FileLogger();
+        private readonly ILogger _logger;
 
-        public ClientHandler(NetworkStream stream, ChannelBase channel)
+        public ClientHandler(NetworkStream stream, ChannelBase channel, ILogger logger)
         {
             _photoService = new PhotoServiceRemote(channel);
             _userService = new UserServiceRemote(channel);
@@ -47,6 +45,7 @@ namespace Server
 
             _protocolCommunication = new ProtocolCommunication(stream);
             _networkStream = stream;
+            _logger = logger;
         }
 
         ~ClientHandler()
@@ -168,7 +167,7 @@ namespace Server
 
         private async Task<Response> HandleLoginAsync(LoginRequest request)
         {
-            logger.SendLog($"New Login request received, request username: {request.UserName}");
+            _logger.SaveLog($"New Login request received, request username: {request.UserName}");
             User user = await _userService.GetUserByUserNameAsync(request.UserName);
             if (user is null)
                 return new ErrorResponse(ErrorId.InvalidCredentials, "Invalid Credentials");

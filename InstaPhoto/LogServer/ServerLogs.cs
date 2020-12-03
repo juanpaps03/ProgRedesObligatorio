@@ -1,7 +1,8 @@
 ﻿using System;
+using AppSettings;
 using LoggerLibrary;
 using LoggerLibrary.Rabbit;
-using RabbitMQ.Client;
+using Microsoft.Extensions.Configuration;
 
 namespace LogServer
 {
@@ -9,16 +10,19 @@ namespace LogServer
     {
         static void Main(string[] args)
         {
-            var connectionFactory = new ConnectionFactory { HostName = "localhost" };
-            using IConnection connection = connectionFactory.CreateConnection();
-            using IModel channel = connection.CreateModel();
+            IConfiguration configuration = AppSettingsFactory.GetAppSettings();
 
-            string queueName = RabbitClient.QueueDeclare(channel);
-            RabbitClient.ReceiveMessages(channel, LogFileHandler);
+            using var rabbitClient = new RabbitQueueHelper(
+                rabbitHostname: configuration["RabbitHost"],
+                queueName: configuration["LogQueueName"]
+            );
+            rabbitClient.QueueDeclare();
+            rabbitClient.ReceiveMessages(LogFileHandler);
 
-            Console.WriteLine($"Listening queue: {queueName}");
+            Console.WriteLine($"Listening queue: {configuration["LogQueueName"]}");
             Console.Read();
         }
+
         private static void LogFileHandler(string message)
         {
             Console.WriteLine($"Saving log message: {message}");

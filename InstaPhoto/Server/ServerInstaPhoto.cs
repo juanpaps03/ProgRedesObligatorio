@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using AppSettings;
 using Grpc.Net.Client;
+using LoggerLibrary;
+using LoggerLibrary.Rabbit;
 using Microsoft.Extensions.Configuration;
 using SocketLibrary.Constants;
 
@@ -15,13 +17,24 @@ namespace Server
         private static bool _exit;
 
         private static readonly object ClientsLock = new object();
+
         private static readonly Dictionary<Guid, (DateTime, ClientHandler)> Clients =
             new Dictionary<Guid, (DateTime, ClientHandler)>();
+
+        private static ILogger _logger;
 
         static async Task Main(string[] args)
         {
             IConfiguration configuration = AppSettingsFactory.GetAppSettings();
-            
+
+            // Init logger
+            using var rabbitQueueHelper = new RabbitQueueHelper(
+                rabbitHostname: configuration["RabbitHost"],
+                queueName: configuration["LogQueueName"]
+            );
+            _logger = new RemoteLogger(rabbitQueueHelper);
+
+            // Init Server
             using var channel = GrpcChannel.ForAddress(configuration["GrpcServer"]);
             var tcpListener = new TcpListener(
                 new IPEndPoint(
@@ -81,7 +94,8 @@ namespace Server
                 var tcpClient = await tcpListener.AcceptTcpClientAsync();
                 var clientHandler = new ClientHandler(
                     stream: tcpClient.GetStream(),
-                    channel
+                    channel,
+                    _logger
                 );
                 var id = await AddClientAsync(clientHandler);
 
