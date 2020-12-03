@@ -4,7 +4,7 @@ namespace LoggerLibrary
 {
     public interface ILogger
     {
-        public void SaveLog(string log);
-        public List<string> ReadLogs();
+        void SaveLog(string log);
+        List<string> ReadLogs();
     }
 }

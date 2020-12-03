@@ -1,3 +1,4 @@
+using System;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,7 @@ namespace WebApi
             services.AddTransient<ChannelBase>(_ => GrpcChannel.ForAddress("https://localhost:5001"));
 
             services.AddScoped<IUserService, UserServiceRemote>();
+            services.AddScoped<ILogService, LogServiceRemote>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

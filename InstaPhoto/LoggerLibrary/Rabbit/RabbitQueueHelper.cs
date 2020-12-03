@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Threading.Tasks;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -31,14 +32,14 @@ namespace LoggerLibrary.Rabbit
         {
             _channel.QueueDeclare(_queueName, false, false, false, null);
         }
-        public void ReceiveMessages(Action<string> handler)
+        public void ReceiveMessages(Func<string, Task> handler)
         {
             var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                handler(message);
+                await handler(message);
             };
             _channel.BasicConsume(_queueName, true, consumer);
         }

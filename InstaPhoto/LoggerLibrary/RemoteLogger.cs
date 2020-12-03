@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Domain;
 using LoggerLibrary.Rabbit;
 
 namespace LoggerLibrary
 {
-    public class RemoteLogger: ILogger
+    public class RemoteLogger : ILogger
     {
         private readonly RabbitQueueHelper _rabbitQueueHelper;
 
