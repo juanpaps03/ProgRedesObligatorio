@@ -1,13 +1,12 @@
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Domain;
 using Exceptions;
-using LoggerLibrary;
 using Grpc.Core;
-using Repositories;
+using LoggerLibrary;
 using Services;
 using Services.Interfaces;
 using SocketLibrary;
@@ -28,6 +27,8 @@ namespace Server
 {
     public class ClientHandler
     {
+        public Guid Id;
+
         private readonly NetworkStream _networkStream;
         private string _clientUsername;
         private bool _exit;
@@ -37,9 +38,9 @@ namespace Server
         private readonly IPhotoService _photoService;
         private readonly IUserService _userService;
         private readonly ICommentService _commentService;
-        private readonly ILogger logger = new FileLogger();
+        private readonly ILogger _logger;
 
-        public ClientHandler(NetworkStream stream, ChannelBase channel)
+        public ClientHandler(NetworkStream stream, ChannelBase channel, ILogger logger)
         {
             _photoService = new PhotoServiceRemote(channel);
             _userService = new UserServiceRemote(channel);
@@ -47,6 +48,7 @@ namespace Server
 
             _protocolCommunication = new ProtocolCommunication(stream);
             _networkStream = stream;
+            _logger = logger;
         }
 
         ~ClientHandler()
@@ -57,7 +59,7 @@ namespace Server
         public string GetClientName()
         {
             return _clientUsername ?? "<Anonymous>";
-        } 
+        }
 
         public async Task ExecuteAsync()
         {
@@ -92,12 +94,16 @@ namespace Server
 
         private async Task<Response> HandleLogoutAsync()
         {
+            _logger.SaveLog($"[id={Id.ToString()}][username={_clientUsername}] New user logout request");
+
             _exit = true;
             return new LogoutResponse();
         }
 
         private async Task<Response> HandleUserListAsync()
         {
+            _logger.SaveLog($"[id={Id.ToString()}][username={_clientUsername}] New list users request");
+
             var users = new List<User>(await _userService.GetUsersAsync());
 
             return new UserListResponse(users);
@@ -105,6 +111,11 @@ namespace Server
 
         private async Task<Response> HandlePhotoListAsync(PhotoListRequest photoListRequest)
         {
+            _logger.SaveLog(
+                $"[id={Id.ToString()}]" +
+                $"[username={_clientUsername}] New list photo request of user {photoListRequest.Username}"
+            );
+
             var user = await _userService.GetUserByUserNameAsync(photoListRequest.Username);
             if (user == null)
                 return new ErrorResponse(
@@ -119,6 +130,10 @@ namespace Server
 
         private async Task<Response> HandleCreatePhotoAsync(CreatePhotoRequest createPhotoRequest)
         {
+            _logger.SaveLog(
+                $"[id={Id.ToString()}][username={_clientUsername}] New photo upload: {createPhotoRequest.Name}"
+            );
+
             try
             {
                 var photoPath = $"photos/{_clientUsername}/{createPhotoRequest.Name}";
@@ -144,12 +159,14 @@ namespace Server
                 return new ErrorResponse(ErrorId.PhotoNameAlreadyExists, e.Message);
             }
         }
-        
+
         private async Task<Response> HandleCreateUserAsync(CreateUserRequest createUserRequest)
         {
+            _logger.SaveLog($"[id={Id.ToString()}] New create user request, username: {createUserRequest.UserName}");
+
             var user = new User()
             {
-                Username = createUserRequest.UserName, 
+                Username = createUserRequest.UserName,
                 Password = createUserRequest.Password,
                 Admin = false
             };
@@ -160,7 +177,7 @@ namespace Server
                 _clientUsername = createdUser.Username;
                 return new CreateUserResponse();
             }
-            catch(DatabaseSaveError)
+            catch (DatabaseSaveError)
             {
                 return new ErrorResponse(ErrorId.UserAlreadyExists, "User already exists");
             }
@@ -168,19 +185,28 @@ namespace Server
 
         private async Task<Response> HandleLoginAsync(LoginRequest request)
         {
-            logger.SendLog($"New Login request received, request username: {request.UserName}");
+            _logger.SaveLog($"[id={Id.ToString()}] New Login request, username: {request.UserName}");
+
             User user = await _userService.GetUserByUserNameAsync(request.UserName);
             if (user is null)
                 return new ErrorResponse(ErrorId.InvalidCredentials, "Invalid Credentials");
-            if (request.Password != user.Password) 
+            if (request.Password != user.Password)
                 return new ErrorResponse(ErrorId.InvalidCredentials, "Invalid Credentials");
-            
+
             _clientUsername = user.Username;
             return new LoginResponse();
         }
 
         private async Task<Response> HandleCommentPhotoAsync(CommentPhotoRequest commentPhotoRequest)
         {
+            _logger.SaveLog(
+                $"[id={Id.ToString()}]" +
+                $"[username={_clientUsername}] New comment photo request " +
+                $"for {commentPhotoRequest.NamePhoto} " +
+                $"from user {commentPhotoRequest.UserName}, " +
+                $"comment: {commentPhotoRequest.Text}"
+            );
+
             try
             {
                 var user = await _userService.GetUserByUserNameAsync(commentPhotoRequest.UserName);
@@ -221,6 +247,13 @@ namespace Server
 
         private async Task<Response> HandleCommentListAsync(CommentListRequest commentListRequest)
         {
+            _logger.SaveLog(
+                $"[id={Id.ToString()}]" +
+                $"[username={_clientUsername}] New list comment request " +
+                $"for {commentListRequest.PhotoName} " +
+                $"from user {commentListRequest.Username}"
+            );
+
             var photo = await _photoService.GetPhotoByPhotoNameAsync(
                 commentListRequest.Username,
                 commentListRequest.PhotoName

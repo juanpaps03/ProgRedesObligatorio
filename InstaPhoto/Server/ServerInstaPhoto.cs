@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using AppSettings;
 using Grpc.Net.Client;
+using LoggerLibrary;
+using LoggerLibrary.Rabbit;
+using Microsoft.Extensions.Configuration;
 using SocketLibrary.Constants;
 
 namespace Server
@@ -13,12 +17,25 @@ namespace Server
         private static bool _exit;
 
         private static readonly object ClientsLock = new object();
+
         private static readonly Dictionary<Guid, (DateTime, ClientHandler)> Clients =
             new Dictionary<Guid, (DateTime, ClientHandler)>();
 
+        private static ILogger _logger;
+
         static async Task Main(string[] args)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            IConfiguration configuration = AppSettingsFactory.GetAppSettings();
+
+            // Init logger
+            using var rabbitQueueHelper = new RabbitQueueHelper(
+                rabbitHostname: configuration["RabbitHost"],
+                queueName: configuration["LogQueueName"]
+            );
+            _logger = new RemoteLogger(rabbitQueueHelper);
+
+            // Init Server
+            using var channel = GrpcChannel.ForAddress(configuration["GrpcServer"]);
             var tcpListener = new TcpListener(
                 new IPEndPoint(
                     IPAddress.Parse("127.0.0.1"),
@@ -77,9 +94,10 @@ namespace Server
                 var tcpClient = await tcpListener.AcceptTcpClientAsync();
                 var clientHandler = new ClientHandler(
                     stream: tcpClient.GetStream(),
-                    channel
+                    channel,
+                    _logger
                 );
-                var id = await AddClientAsync(clientHandler);
+                await AddClientAsync(clientHandler);
 
                 Task.Run(async () =>
                 {
@@ -93,36 +111,31 @@ namespace Server
                     }
                     finally
                     {
-                        await RemoveClientAsync(id);
+                        await RemoveClientAsync(clientHandler.Id);
                     }
                 });
             }
         }
 
-        private static Task<Guid> AddClientAsync(ClientHandler clientHandler)
+        private static async Task AddClientAsync(ClientHandler clientHandler)
         {
-            var id = Guid.NewGuid();
             lock (ClientsLock)
             {
-                while (Clients.ContainsKey(id))
-                    id = Guid.NewGuid();
-                Clients[id] = (DateTime.Now, clientHandler);
+                while (Clients.ContainsKey(clientHandler.Id))
+                    clientHandler.Id = Guid.NewGuid();
+                Clients[clientHandler.Id] = (DateTime.Now, clientHandler);
             }
-
-            return Task.FromResult(id);
         }
 
-        private static Task RemoveClientAsync(Guid id)
+        private async static Task RemoveClientAsync(Guid id)
         {
             lock (ClientsLock)
             {
                 Clients.Remove(id);
             }
-
-            return Task.FromResult(0);
         }
 
-        private static Task<List<(Guid, DateTime, string)>> GetClientNamesAsync()
+        private async static Task<List<(Guid, DateTime, string)>> GetClientNamesAsync()
         {
             var clientNames = new List<(Guid, DateTime, string)>();
             lock (ClientsLock)
@@ -135,7 +148,7 @@ namespace Server
                 }
             }
 
-            return Task.FromResult(clientNames);
+            return clientNames;
         }
     }
 }
