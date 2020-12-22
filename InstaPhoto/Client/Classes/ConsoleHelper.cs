@@ -7,8 +7,8 @@ namespace Client.Classes
 {
     public class ConsoleHelper
     {
-        public const ConsoleColor DefaultColor = ConsoleColor.Black;
-        public const ConsoleColor DefaultBackground = ConsoleColor.White;
+        public const ConsoleColor DefaultColor = ConsoleColor.White;
+        public const ConsoleColor DefaultBackground = ConsoleColor.Black;
 
         public static void Clear()
         {

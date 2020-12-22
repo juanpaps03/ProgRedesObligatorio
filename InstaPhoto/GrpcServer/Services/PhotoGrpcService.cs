@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -32,11 +33,22 @@ namespace GrpcServer.Services
         public override async Task<SavePhotoReply> SavePhoto(SavePhotoRequest request, ServerCallContext context)
         {
             var photo = _mapper.Map<Photo>(request.Photo);
-            var responsePhoto = await _photoService.SavePhotoAsync(photo);
-            return new SavePhotoReply
+
+            try
             {
-                Photo = _mapper.Map<PhotoMessage>(responsePhoto)
-            };
+                var responsePhoto = await _photoService.SavePhotoAsync(photo);
+                return new SavePhotoReply
+                {
+                    Photo = _mapper.Map<PhotoMessage>(responsePhoto)
+                };
+            }
+            catch (Exception e)
+            {
+                return new SavePhotoReply
+                {
+                    Photo = null
+                };
+            }
         }
 
         public override async Task<GetPhotosFromUserReply> GetPhotosFromUser(

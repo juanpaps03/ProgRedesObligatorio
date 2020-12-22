@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -53,11 +54,21 @@ namespace GrpcServer.Services
         public override async Task<SaveUserReply> SaveUser(SaveUserRequest request, ServerCallContext context)
         {
             var requestUser = _mapper.Map<User>(request.User);
-            var responseUser = await _userService.SaveUserAsync(requestUser);
-            return new SaveUserReply
+            try
             {
-                User = _mapper.Map<UserMessage>(responseUser)
-            };
+                var responseUser = await _userService.SaveUserAsync(requestUser);
+                return new SaveUserReply
+                {
+                    User = _mapper.Map<UserMessage>(responseUser)
+                };
+            }
+            catch (Exception e)
+            {
+                return new SaveUserReply
+                {
+                    User = null
+                };
+            }
         }
 
         public override async Task<GetPaginatedUsersReply> GetPaginatedUsers(
@@ -72,18 +83,39 @@ namespace GrpcServer.Services
         public override async Task<UpdateUserReply> UpdateUser(UpdateUserRequest request, ServerCallContext context)
         {
             var user = _mapper.Map<User>(request.User);
-            var responseUser = await _userService.UpdateUserAsync(user);
-            return new UpdateUserReply
+
+            try
             {
-                User = _mapper.Map<UserMessage>(responseUser)
-            };
+                var responseUser = await _userService.UpdateUserAsync(user);
+                return new UpdateUserReply
+                {
+                    User = _mapper.Map<UserMessage>(responseUser)
+                };
+            }
+            catch (Exception e)
+            {
+                return new UpdateUserReply
+                {
+                    User = null
+                };
+            }
         }
 
         public override async Task<DeleteUserReply> DeleteUser(DeleteUserRequest request, ServerCallContext context)
         {
             var user = _mapper.Map<User>(request.User);
-            await _userService.DeleteUserAsync(user);
+
+            try
+            {
+                await _userService.DeleteUserAsync(user);
+            }
+            catch (Exception e)
+            {
+                // Nothing
+            }
+
             return new DeleteUserReply();
+            
         }
     }
 }

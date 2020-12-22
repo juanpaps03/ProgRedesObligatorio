@@ -57,6 +57,10 @@ namespace WebApi.Controllers
         public async Task<ActionResult<User>> UpdateUserAsync(User user)
         {
             var responseUser = await _userService.UpdateUserAsync(user);
+            if (responseUser == null)
+            {
+                return BadRequest("Non existing user");
+            }
             return Ok(responseUser);
         }
         

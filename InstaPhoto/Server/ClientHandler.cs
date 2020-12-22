@@ -139,12 +139,19 @@ namespace Server
                 var photoPath = $"photos/{_clientUsername}/{createPhotoRequest.Name}";
 
                 // Persist photo
-                await _photoService.SavePhotoAsync(new Photo
+                var photo = await _photoService.SavePhotoAsync(new Photo
                 {
                     Name = createPhotoRequest.Name,
                     File = photoPath,
                     Username = _clientUsername
                 });
+                if (photo == null)
+                {
+                    return new ErrorResponse(
+                        ErrorId.PhotoNameAlreadyExists, 
+                        $"Photo {createPhotoRequest.Name}"
+                    );
+                }
 
                 // Persist file
                 Directory.CreateDirectory(Path.GetDirectoryName(photoPath));
@@ -174,6 +181,9 @@ namespace Server
             try
             {
                 var createdUser = await _userService.SaveUserAsync(user);
+                if (createdUser == null) 
+                    return new ErrorResponse(ErrorId.UserAlreadyExists, "User already exists");
+                
                 _clientUsername = createdUser.Username;
                 return new CreateUserResponse();
             }
